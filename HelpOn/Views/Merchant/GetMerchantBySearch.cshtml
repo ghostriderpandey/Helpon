@@ -1,0 +1,62 @@
+﻿@model List<HelpOn.Models.MasterMerchant>
+<section class="section-padding">
+    <div class="container">
+        @Html.Action("FilterMerchant", "Merchant")
+        <div class="row">
+
+            <div class="col-xl-12 mb-4 mt-4">
+                <h4 style="font-family: 'Libre Baskerville', serif;">Near by @ViewBag.CategoryName</h4>
+            </div>
+
+            @foreach (var ItemMerchant in Model)
+            {
+                <div class="col-xl-3 col-sm-6 mb-4">
+                    <div class="custom-card shadow-sm h-100 stor-card" style="border: 1px solid #ff0080;border-radius: 10px;">
+                        <div class="custom-card-image">
+                            <a href="/Detail/@ItemMerchant.MID" style="color:black">
+
+                                <img class="img-fluid item-img premiumshop" src="@ItemMerchant.ThumbnailIMG" style="object-fit: fill; height: 180px; width: 100%; border-top-left-radius: 10px; border-top-right-radius: 10px;">
+                                @*<div class="top-right"><span><img src="/images/paid_member.webp" style="width: 40px;background-color: white;border-radius: 50%;"></span></div>*@
+
+                            </a>
+                        </div>
+                        <div class="p-3">
+                            <div class="custom-card-body">
+                                <h6 class="mb-0"><a class="text-black" href="/Detail/@ItemMerchant.MID" style="color: black;font-family: 'Libre Baskerville', serif;">@ItemMerchant.Shopname </a></h6>
+                                <p class="text-gray mb-2 text-muted" style="font-size: 11px;font-family: 'Libre Baskerville', serif;word-break:break-word;">  @ItemMerchant.Shopname,@ItemMerchant.Address,@ItemMerchant.CityName,@ItemMerchant.StateName -@ItemMerchant.Pincode</p>
+                                <a href="https://www.google.com/maps?q=@ItemMerchant.Shopname.Replace(" ","+")+@ItemMerchant.Address.Replace(" ","+")+@ItemMerchant.CityName.Replace(" ","+")+@ItemMerchant.StateName.Replace(" ","+")+@ItemMerchant.Pincode+" class="eicon-google-maps" target="_blank"> Location</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</section>
+<script>
+    $(document).ready(function () {
+        $("#filterform").submit(function (e) {
+            e.preventDefault(e);
+            var url = $('#filterform')[0].action;
+
+            $.ajax({
+                type: "POST",
+                url: url,
+                data: $('#filterform').serialize(),
+                success: function (data) {
+                    $("#renderbody").html('');
+                    $("#renderbody").html(data);
+                },
+                error: function (xhr, status, error) {
+                    alert(error);
+                }
+            })
+        });
+    });
+    $(".Sugetionbox").autofill({
+
+        fullWidth: false,
+        darkMode: true,
+        minCharacters: 1
+    });
+</script>

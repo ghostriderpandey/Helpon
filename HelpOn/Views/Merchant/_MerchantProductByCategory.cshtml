@@ -1,0 +1,23 @@
+﻿@model List<HelpOn.Models.CategoryModel>
+@using HelpOn.Helper
+<ul class="nav nav-tabs" id="myTab" role="tablist">
+
+
+    <li class="nav-item" role="presentation" data-id="0">
+        <button class="nav-link active" id="home-tab" data-bs-toggle="tab" data-id="0" data-bs-target="#home" type="button" role="tab" aria-controls="home" aria-selected="true">All</button>
+    </li>
+    @foreach (var item in Model)
+    {
+        <li class="nav-item ml-1" role="presentation">
+            <button class="nav-link" id="profile-tab" data-bs-toggle="tab" data-id="@item.ID" data-bs-target="#profile" type="button" role="tab" aria-controls="profile" aria-selected="false">@item.Name</button>
+        </li>
+    }
+
+</ul>
+<div style="display:flex;margin-top:10px;">
+    <input id="txtSearchproduct" type="text" placeholder="Search any Product" data-autofill-values="@ViewBag.ProductSearch" name="Searchproduct" autocomplete="off" class="form-control bordered Sugetionbox" style="background:#fff;color:#000;">
+    <button type="button" class="bg-info" id="btnSearchProduct" style="display:flex;justify-content:center;align-items:center;"><i class="klbth-icon-search" style="margin:0;"></i> </button>
+</div>
+
+
+

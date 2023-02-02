@@ -1,0 +1,83 @@
+﻿@model List<HelpOn.Models.ProductModel>
+@using HelpOn.Helper
+<div class="klb-title module-header">
+    <h4 class="entry-title text-capitalize" style="font-family: 'Libre Baskerville', serif;">Products/Service</h4>
+    <div class="button-icon">
+        <button type="button" class="btn btn-primary" onclick="GoToCart()">
+            Go To Cart (<span id="cartitem">@ViewBag.CartItem</span> ) <i class="klbth-icon-shopping-bag"></i>
+        </button>
+    </div>
+</div>
+
+<div class="products column-5 mobile-column-2 align-inherit">
+    @foreach (var product in Model)
+    {
+        <div class="product type-product post-240 status-publish first instock product_cat-fruits-vegetables product_tag-fresh product_tag-organic has-post-thumbnail sale shipping-taxable purchasable product-type-variable has-default-attributes">
+            <div class="product-wrapper product-type-1">
+                <div class="thumbnail-wrapper p-1 text-center">
+                    <div class="product-badges">
+                        <span class="badge style-1 onsale" style="font-family: 'Libre Baskerville', serif;">@product.Discount%</span>
+                    </div>
+                    <a href="/product/@product.ID" style="width:120px;height:120px;margin:auto;">
+                        <img src="@product.IMG1" alt="@product.Name" style="width:100%;height:100%;" />
+                    </a>
+                </div>
+                <div class="content-wrapper p-2">
+                    <h3 class="product-title " style="font-size:.775rem;">
+                        <a href="/product/@product.ID" class="productname" title="Party cannon" style="color:#000;display:block;">@product.Name</a>
+                    </h3>
+                    <span class="price" style="font-size:1rem;">
+                        <del aria-hidden="true">
+                            <span class="woocommerce-Price-amount amount">
+                                <bdi> <span class="woocommerce-Price-currencySymbol">Rs.</span>@product.MRP </bdi>
+                            </span>
+                        </del>
+                        <ins>
+                            <span class="woocommerce-Price-amount amount">
+                                <bdi> <span class="woocommerce-Price-currencySymbol">Rs.</span>@product.Price </bdi>
+                            </span>
+                        </ins>
+                    </span>
+                    @if (product.IsCart > 0)
+                    {
+                        <div class="product-fade-lock">
+                            <div class="product-button-group cart-with-quantity product-in-cart">
+                                <div class="quantity">
+                                    <div class="quantity-button minus" onclick="AddToCart(@product.ID,-1)"><i class="klbth-icon-minus"></i></div>
+                                    <input type="text" class="input-text qty text quantity_62dc60b7d06bd12" name="quantity" step="1" min="" max="10" value="@product.Qty" title="Menge" size="4" inputmode="numeric">
+                                    <div class="quantity-button plus" onclick="AddToCart(@product.ID,1)"><i class="klbth-icon-plus"></i></div>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                    else
+                    {
+
+
+                        <div class="product-fade-lock">
+                            <div class="product-button-group cart-with-quantity product-in-cart">
+                                @if (product.IsStock > 0)
+                                {
+                                    <button class="addToCart quantity_62dc60b7d06bd button-primary xsmall rounded wide button product_type_simple add_to_cart_button ajax_add_to_cart" onclick="AddToCart(@product.ID,1)" data-id="@product.ID">
+                                        Add to cart
+                                    </button>
+                                }
+                                else
+                                {
+                                    <button class="addToCart quantity_62dc60b7d06bd button-warning xsmall rounded wide button product_type_simple add_to_cart_button ajax_add_to_cart">
+                                        Out of Stock
+                                    </button>
+                                }
+
+                            </div>
+                        </div>
+                    }
+
+
+                </div>
+            </div>
+
+        </div>
+    }
+
+</div>

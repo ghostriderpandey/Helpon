@@ -1,0 +1,483 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title | Helpon</title>
+    <link rel='dns-prefetch' href='http://fonts.googleapis.com/' />
+    <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville&amp;family=Merienda+One&amp;family=Poppins:ital,wght@0,500;1,400&amp;display=swap" rel="stylesheet">
+
+    <link href="~/assets/css/style.css" rel="stylesheet" />
+    <link as='font' type='font/woff2' crossorigin='anonymous' id='tinvwl-webfont-font-css' href='~/assets/fonts/tinvwl-webfont.woff2' media='all' />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link href="~/assets/css/fab80.css" rel="stylesheet" />
+    <link href="~/assets/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="~/assets/OwlCarousel/owl.carousel.css" rel="stylesheet" />
+    <link href="~/assets/OwlCarousel/owl.theme.default.css" rel="stylesheet" />
+    <link href="~/assets/lightbox/src/css/lightbox.css" rel="stylesheet" />
+
+    <script src="~/assets/js/jquery-3.6.1.js"></script>
+    <script src="~/assets/js/sweetalert.min.js"></script>
+    <script src="~/assets/js/autofill.js"></script>
+    <script src="~/Script/AjaxCall.js"></script>
+    <script>
+        $(document).ready(function () {
+            PostForm('/Home/GetallCategoryFirst', '{"CId":18}', 'json', 50000, respc1);
+            PostForm('/Home/GetallCategoryFirst', '{"CId":19}', 'json', 50000, respc2);
+            PostForm('/Home/GetallCategoryFirst', '{"CId":5}', 'json', 50000, respc3);
+            PostForm('/Home/GetallCategoryFirst', '{"CId":7}', 'json', 50000, respc4);
+        });
+        function respc1(response) {
+            if ((response && jQuery.isArray(response)) ? (response.length == 0 ? false : (jQuery.isPlainObject(response[0]) ? !jQuery.isEmptyObject(response[0]) : response[0])) : response) {
+
+                $("#hcat1").html(response.Name);
+                $("#Ulsubcat1").empty();
+                $.each(response.subcateName, function (i) {
+                    var optionhtml = '<li value="' +
+                        response.subcateName[i].SubCatId + '" class="menu-item menu-item-type-taxonomy"><a href="/Segment/' + response.subcateName[i].SubCatName + '" style=\"font-family:Libre Baskerville\" >' + response.subcateName[i].SubCatName + '</a></li>';
+                    $("#Ulsubcat1").append(optionhtml);
+                });
+            }
+        }
+        function respc2(response) {
+            if (response) {
+                $("#hcat2").html(response.Name);
+                $("#Ulsubcat2").empty();
+                $.each(response.subcateName, function (i) {
+                    var optionhtml = '<li value="' +
+                        response.subcateName[i].SubCatId + '" class="menu-item menu-item-type-taxonomy"><a href="/Segment/' + response.subcateName[i].SubCatName + '" style=\"font-family:Libre Baskerville\" >' + response.subcateName[i].SubCatName + '</a></li>';
+                    $("#Ulsubcat2").append(optionhtml);
+                });
+            }
+        }
+        function respc3(response) {
+            if (response) {
+                $("#hcat3").html(response.Name);
+                $("#Ulsubcat3").empty();
+                $.each(response.subcateName, function (i) {
+                    var optionhtml = '<li value="' +
+                        response.subcateName[i].SubCatId + '" class="menu-item menu-item-type-taxonomy"><a href="/Segment/' + response.subcateName[i].SubCatName + '" style=\"font-family:Libre Baskerville\">' + response.subcateName[i].SubCatName + '</a></li>';
+                    $("#Ulsubcat3").append(optionhtml);
+                });
+            }
+        }
+        function respc4(response) {
+            if (response) {
+                $("#hcat4").html(response.Name);
+                $("#Ulsubcat4").empty();
+                $.each(response.subcateName, function (i) {
+                    var optionhtml = '<li value="' +
+                        response.subcateName[i].SubCatId + '" class="menu-item menu-item-type-taxonomy"><a href="/Segment/' + response.subcateName[i].SubCatName + '" style=\"font-family:Libre Baskerville\">' + response.subcateName[i].SubCatName + '</a></li>';
+                    $("#Ulsubcat4").append(optionhtml);
+                });
+            }
+        }
+    </script>
+</head>
+<body class="home page-template-default page page-id-50 theme-bacola woocommerce-no-js tinvwl-theme-style  elementor-default elementor-kit-11 elementor-page elementor-page-50">
+    <div class="site-canvas">
+        <div class="site-scroll">
+            <div class="canvas-header">
+                <div class="site-brand">
+                    <a href="#" title="Helpon| Shop Online from your favourite store | Grab Daily Deal - Help on">
+                        <img src="~/assets/images/deal_logo.png" style="width: 130px;" alt="HelponLogo">
+                    </a>
+                </div>
+                <div class="close-canvas">
+                    <i class="klbth-icon-x"></i>
+                </div>
+            </div>
+            <div class="canvas-main">
+
+                <div class="all-categories locked">
+                    <a href="#" data-toggle="collapse" data-target="#all-categories-Mobile" aria-expanded="true" aria-controls="all-categories-Mobile">
+                        <i class="klbth-icon-menu-thin"></i>
+                        <span style="font-family: 'Libre Baskerville', serif;font-weight: normal;" class="text text-capitalize">All Segments</span>
+
+                    </a>
+                    <div class="dropdown-categories collapse DesktopMenu" id="all-categories-Mobile">
+                        @Html.Action("SideDropDownMenu", "Home")
+                    </div>
+                </div>
+                <nav class="canvas-menu canvas-primary vertical">
+                    <ul id="menu-menu-1" class="menu">
+                        <li class=" menu-item menu-item-type-taxonomy menu-item-object-product_cat"><a href="/" style="font-family: 'Libre Baskerville', serif;"> Home</a></li>
+                        <li class=" menu-item menu-item-type-taxonomy menu-item-object-product_cat current-product-ancestor current-menu-parent current-product-parent"><a href="/Coming-Soon" style="font-family: 'Libre Baskerville', serif;"> Exclusive Deals &amp; Offers</a></li>
+                        <li class=" menu-item menu-item-type-taxonomy menu-item-object-product_cat"><a href="/Coming-Soon" style="font-family: 'Libre Baskerville', serif;" class="text-capitalize"> Paid Merchant</a></li>
+                        <li class=" menu-item menu-item-type-taxonomy menu-item-object-product_cat"><a href="/Coming-Soon" style="font-family: 'Libre Baskerville', serif;">Features</a></li>
+                        <li class=" menu-item menu-item-type-taxonomy menu-item-object-product_cat"><a href="/Coming-Soon" style="font-family: 'Libre Baskerville', serif;"> Live Locations</a></li>
+
+                        <li class=" menu-item menu-item-type-taxonomy menu-item-object-product_cat"><a target="_blank" href="http://merchant.helpon.in/Merchant/login.aspx" style="font-family: 'Libre Baskerville', serif;"> Free Listing</a></li>
+                    </ul>
+                </nav>
+            </div>
+            <div class="canvas-footer">
+                <div class="site-copyright">
+                    Copyright 2022 © <span style="color:#722A74;font-weight: bold;">Help</span><span style="color: #C03168;font-weight: bold;">On</span> 2022.
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <header id="masthead" class="site-header desktop-shadow-disable mobile-shadow-enable mobile-nav-enable" itemscope="itemscope" itemtype="http://schema.org/WPHeader">
+
+
+
+        @Html.Action("_TopHeader", "Home")
+
+        <div class="header-nav header-wrapper hide-mobile">
+            <div class="container">
+                <div class="all-categories locked">
+                    <a href="#" data-toggle="collapse" data-target="#all-categories-Desktop">
+                        <i class="klbth-icon-menu-thin"></i>
+                        <span style="font-family: 'Libre Baskerville', serif;font-weight: normal;" class="text text-capitalize">All Segments</span>
+
+                    </a>
+                    <div class="dropdown-categories collapse" id="all-categories-Desktop">
+                        @Html.Action("SideDropDownMenu", "Home")
+                    </div>
+                </div>
+                <nav class="site-menu primary-menu horizontal">
+                    <ul id="menu-menu-2" class="menu">
+                        <li class=" menu-item menu-item-type-post_type menu-item-object-page">
+                            <a href="/" style="font-family: 'Libre Baskerville', serif;" class="text-capitalize">Home</a>
+                        </li>
+                        <li class=" menu-item menu-item-type-taxonomy menu-item-object-product_cat current-product-ancestor current-menu-parent current-product-parent">
+                            <a href="/Coming-Soon" class="text-capitalize" style="font-family: 'Libre Baskerville', serif;text-decoration: none;"> Recharge &amp; Bill Pay</a>
+                        </li>
+                        <li class="dropdown  menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-has-children">
+                            <a href="#" style="font-family: 'Libre Baskerville', serif;" class="text-capitalize">Loans</a>
+                            <ul class="sub-menu">
+                                <li class=" menu-item menu-item-type-post_type menu-item-object-page menu-item-home">
+                                    <a href="/Coming-Soon" style="font-family: 'Libre Baskerville', serif;">Home Loan</a>
+                                </li>
+                                <li class=" menu-item menu-item-type-post_type menu-item-object-page menu-item-home">
+                                    <a href="/Coming-Soon" style="font-family: 'Libre Baskerville', serif;">Personal Loan</a>
+                                </li>
+                                <li class=" menu-item menu-item-type-post_type menu-item-object-page menu-item-home">
+                                    <a href="/Coming-Soon" style="font-family: 'Libre Baskerville', serif;">Credit Loan</a>
+                                </li>
+                                <li class=" menu-item menu-item-type-post_type menu-item-object-page menu-item-home">
+                                    <a href="/Coming-Soon" style="font-family: 'Libre Baskerville', serif;">Business Loan</a>
+                                </li>
+                                <li class=" menu-item menu-item-type-post_type menu-item-object-page menu-item-home">
+                                    <a href="/Coming-Soon" style="font-family: 'Libre Baskerville', serif;">Car Loan</a>
+                                </li>
+                                <li class=" menu-item menu-item-type-post_type menu-item-object-page menu-item-home">
+                                    <a href="/Coming-Soon" style="font-family: 'Libre Baskerville', serif;">Gold Loan</a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="dropdown  menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-has-children">
+                            <a href="#" style="font-family: 'Libre Baskerville', serif;" class="text-capitalize">Insurance</a>
+                            <ul class="sub-menu">
+                                <li class=" menu-item menu-item-type-post_type menu-item-object-page menu-item-home">
+                                    <a href="/Coming-Soon" style="font-family: 'Libre Baskerville', serif;">Helth Insurance</a>
+                                </li>
+                                <li class=" menu-item menu-item-type-post_type menu-item-object-page menu-item-home">
+                                    <a href="/Coming-Soon" style="font-family: 'Libre Baskerville', serif;">Term Insurance</a>
+                                </li>
+                                <li class=" menu-item menu-item-type-post_type menu-item-object-page menu-item-home">
+                                    <a href="/Coming-Soon" style="font-family: 'Libre Baskerville', serif;">Car Insurance</a>
+                                </li>
+                                <li class=" menu-item menu-item-type-post_type menu-item-object-page menu-item-home">
+                                    <a href="/Coming-Soon" style="font-family: 'Libre Baskerville', serif;">Two Wheeler Insurance</a>
+                                </li>
+
+                            </ul>
+                        </li>
+
+                        <li class=" menu-item menu-item-type-post_type menu-item-object-page">
+                            <a href="http://merchant.helpon.in/Merchant/login.aspx" target="_blank" style="font-family: 'Libre Baskerville', serif;" class="text-capitalize">Free Listing</a>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+        <nav class="header-mobile-nav">
+            <div class="mobile-nav-wrapper">
+                <ul>
+                    <li class="menu-item">
+                        <a href="/" class="store">
+                            <i class="klbth-icon-store"></i>
+                            <span style="font-family: 'Libre Baskerville', serif;">Home</span>
+                        </a>
+                    </li>
+                    <li class="menu-item">
+                        <a href="#" class="search">
+                            <i class="klbth-icon-search"></i>
+                            <span style="font-family: 'Libre Baskerville', serif;">Search</span>
+                        </a>
+                    </li>
+                    <li class="menu-item">
+                        <a href="/Coming-Soon" class="wishlist">
+                            <i class="klbth-icon-heart-1"></i>
+                            <span style="font-family: 'Libre Baskerville', serif;">Features</span>
+                        </a>
+                    </li>
+                    <li class="menu-item">
+                        <a href="/Coming-Soon" class="user">
+                            <i class="klbth-icon-user"></i>
+                            <span style="font-family: 'Libre Baskerville', serif;">Login</span>
+                        </a>
+                    </li>
+                    <li class="menu-item">
+                        <a href="#" class="categories">
+                            <i class="klbth-icon-menu-thin"></i>
+                            <span style="font-family: 'Libre Baskerville', serif;">More</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+
+    <div id="renderbody">
+        @RenderBody()
+    </div>
+    <footer class="site-footer mt-2">
+        <div class="footer-iconboxes">
+            <div class="container">
+                <div class="row">
+                    <div class="col col-12 col-md-6 col-lg-3">
+                        <div class="iconbox">
+                            <div class="iconbox-icon"><i class="klbth-icon-store"></i></div>
+                            <div class="iconbox-detail">
+                                <span style="font-family: 'Libre Baskerville', serif;">E-Market Platform</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col col-12 col-md-6 col-lg-3">
+                        <div class="iconbox">
+                            <div class="iconbox-icon"><i class="klbth-icon-delivery-truck-2"></i></div>
+                            <div class="iconbox-detail">
+                                <span style="font-family: 'Libre Baskerville', serif;">
+                                    Free PAN India Delivery
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col col-12 col-md-6 col-lg-3">
+                        <div class="iconbox">
+                            <div class="iconbox-icon"><i class="klbth-icon-discount-outline"></i></div>
+                            <div class="iconbox-detail">
+                                <span style="font-family: 'Libre Baskerville', serif;">Exclusive Deals</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col col-12 col-md-6 col-lg-3">
+                        <div class="iconbox">
+                            <div class="iconbox-icon"><i class="klbth-icon-thumbs-up"></i></div>
+                            <div class="iconbox-detail">
+                                <span style="font-family: 'Libre Baskerville', serif;">Best price on the market</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-widgets border-enable">
+                <div class="container">
+                    <div class="row">
+                        <div class="col col-12 col-lg-3 col-five">
+                            <div class="klbfooterwidget widget widget_nav_menu">
+                                <h4 class="widget-title text-capitalize" style="font-family: 'Libre Baskerville', serif;" id="hcat1"></h4>
+                                <div class="menu-fruits-and-vegetables-container">
+                                    <ul id="Ulsubcat1" class="menu">
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col col-12 col-lg-3 col-five">
+                            <div class="klbfooterwidget widget widget_nav_menu">
+                                <h4 class="widget-title text-capitalize" style="font-family: 'Libre Baskerville', serif;" id="hcat2"></h4>
+                                <div class="menu-breakfast-dairy-container">
+                                    <ul id="Ulsubcat2" class="menu">
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col col-12 col-lg-3 col-five">
+                            <div class="klbfooterwidget widget widget_nav_menu">
+                                <h4 class="widget-title text-capitalize" style="font-family: 'Libre Baskerville', serif;" id="hcat3"></h4>
+                                <div class="menu-meat-seafood-container">
+                                    <ul id="Ulsubcat3" class="menu">
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col col-12 col-lg-3 col-five">
+                            <div class="klbfooterwidget widget widget_nav_menu">
+                                <h4 class="widget-title text-capitalize" style="font-family: 'Libre Baskerville', serif;" id="hcat4"> </h4>
+                                <div class="menu-beverages-container">
+                                    <ul id="Ulsubcat4" class="menu">
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col col-12 col-lg-3 col-five">
+                            <div class="klbfooterwidget widget widget_nav_menu">
+                                <h4 class="widget-title text-capitalize" style="font-family: 'Libre Baskerville', serif;">Important &amp; Links</h4>
+                                <div class="menu-breakfast-dairy-container">
+                                    <ul id="menu-breakfast-dairy-1" class="menu">
+                                        <li class="menu-item menu-item-type-taxonomy menu-item-object-product_cat menu-item-1802"><a href="#" style="font-family: 'Libre Baskerville', serif;">Exclusive Deals &amp; Offers</a></li>
+                                        <li class="menu-item menu-item-type-taxonomy menu-item-object-product_cat menu-item-1803"><a href="#" style="font-family: 'Libre Baskerville', serif;">Channel Partner</a></li>
+                                        <li class="menu-item menu-item-type-taxonomy menu-item-object-product_cat menu-item-1804"><a href="#" style="font-family: 'Libre Baskerville', serif;">Live Location</a></li>
+                                        <li class="menu-item menu-item-type-taxonomy menu-item-object-product_cat menu-item-1805"><a href="#" style="font-family: 'Libre Baskerville', serif;">Features</a></li>
+                                        <li class="menu-item menu-item-type-taxonomy menu-item-object-product_cat menu-item-1806"><a href="#" style="font-family: 'Libre Baskerville', serif;">Our Merchant</a></li>
+                                        <li class="menu-item menu-item-type-taxonomy menu-item-object-product_cat menu-item-1808"><a href="#" style="font-family: 'Libre Baskerville', serif;">Our Executive</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer-contacts">
+            <div class="container">
+                <div class="column column-left">
+                    <div class="site-phone d-none">
+                        <div class="phone-icon"><i class="klbth-icon-phone-call"></i></div>
+                        <div class="phone-detail ">
+                            <h4 class="entry-title" style="font-family: 'Libre Baskerville', serif;">9999999999</h4>
+
+                        </div>
+                    </div>
+                </div>
+                <div class="column column-right">
+                    <div class="site-mobile-app">
+                        <div class="app-content">
+                            <h6 class="entry-title" style="font-family: 'Libre Baskerville', serif;">Download App on Mobile :</h6>
+
+                        </div>
+                        <div class="app-buttons">
+                            <a href="/Coming-Soon" class="google-play">
+                                <img src="~/assets/images/icon/google-play.png" alt="app">
+                            </a>
+                            <a href="/Coming-Soon" class="google-play">
+                                <img src="~/assets/images/icon/app-store.png" alt="app">
+                            </a>
+                        </div>
+                    </div>
+                    <div class="social-share site-social style-1">
+
+                        <ul class="social-container justify-content-around">
+                            <li><a href="https://www.facebook.com/helpon123" target="_blank" class="facebook" style="width: 3.125rem; height: 3.125rem;"><i class="klbth-icon-facebook" style="font-size: 1.9375rem;"></i></a></li>
+                            <li><a href="/Coming-Soon" target="_blank" class="twitter" style="width: 3.125rem; height: 3.125rem;"><i class="klbth-icon-twitter" style="font-size: 1.9375rem;"></i></a></li>
+                            <li><a href="https://www.instagram.com/helpondigitalservies/" target="_blank" class="instagram" style="width: 3.125rem; height: 3.125rem;"><i class="klbth-icon-instagram" style="font-size: 1.9375rem;"></i></a></li>
+                            <li><a href="/Coming-Soon" target="_blank" class="whatsapp" style="width: 3.125rem; height: 3.125rem;"><i class="klbth-icon-whatsapp" style="font-size: 1.9375rem;"></i></a></li>
+                            <li><a href="https://www.youtube.com/channel/UCZpsbeTt2Ed4vM0IyQzA8dw" target="_blank" class="youtube" style="width: 3.125rem; height: 3.125rem;"><i class="klbth-icon-youtube" style="font-size: 1.9375rem;"></i></a></li>
+
+
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer-bottom border-enable">
+
+            <div class="container" style="color: black;font-weight: bold;">
+                <div class="site-copyright" style="font-weight: bold;">
+                    <p style="font-family: 'Libre Baskerville', serif;font-weight: bold;">Copyright © <span style="/* color:#672874; *//* font-weight: bold; */text-transform: uppercase;">help</span><span style="/* color: #c13269; *//* font-weight: bold; */text-transform: uppercase;">On</span> 2022</p>
+                </div>
+                <nav class="site-menu footer-menu">
+                    <ul id="menu-footer-menu" class="menu">
+                        <li id="menu-item-1844" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-1844">
+                            <a href="/about-us" style="font-family: 'Libre Baskerville', serif;">About us</a>
+                        </li>
+                        <li id="menu-item-1889" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-privacy-policy menu-item-1889">
+                            <a href="/Privacy-Policy" style="font-family: 'Libre Baskerville', serif;">Privacy Policy</a>
+                        </li>
+                        <li id="menu-item-2066" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-2066">
+                            <a href="/Terms-and-Conditions" style="font-family: 'Libre Baskerville', serif;">Terms and Conditions</a>
+                        </li>
+                        <li id="menu-item-2066" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-2066">
+                            <a href="/Disclaimer" style="font-family: 'Libre Baskerville', serif;">Disclaimer</a>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </footer>
+    <div class="site-overlay"></div>
+
+    <div class="select-location">
+        <div class="select-location-wrapper">
+            <h6 class="entry-title">Choose your Location</h6>
+            <div class="entry-description">Enter your address and we will specify the offer for your area.</div>
+            <div class="close-popup"><i class="klbth-icon-x"></i></div>
+
+            <div class="search-location">
+                <select size="8" name="site-area" class="site-area" id="site-area" data-placeholder="Search your area">
+                </select>
+            </div>
+
+        </div>
+
+        <div class="location-overlay"></div>
+    </div>
+
+    <div class="woosc-popup woosc-search">
+        <div class="woosc-popup-inner">
+            <div class="woosc-popup-content">
+                <div class="woosc-popup-content-inner">
+                    <div class="woosc-popup-close"></div>
+                    <div class="woosc-search-input">
+                        <input type="search" id="woosc_search_input" placeholder="Type any keyword to search..." />
+                    </div>
+                    <div class="woosc-search-result"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    @Html.Action("Login", "Account")
+
+    <script src="~/assets/js/bootstrap.min.js"></script>
+    <script src="~/assets/lightbox/src/js/lightbox.js"></script>
+    <script src="~/assets/OwlCarousel/owl.carousel.js"></script>
+    <script src="~/assets/js/jQuery.loadScroll.js"></script>
+
+    <script>
+        $('img').loadScroll(1000);
+
+        $(".Sugetionbox").autofill({
+
+            fullWidth: false,
+            darkMode: true,
+            minCharacters: 1
+        });
+
+        function Loginpopup() {
+            $('#LoginModalCenter').modal('show');
+        }
+        $(document).ready(function () {
+            $("#Experience").submit(function (e) {
+                e.preventDefault(e);
+                var url = $('#Experience')[0].action;
+
+                $.ajax({
+                    type: "POST",
+                    url: url,
+                    data: $('#Experience').serialize(),
+                    success: function (data) {
+                        $("#renderbody").html('');
+                        $("#renderbody").html(data);
+                    },
+                    error: function (xhr, status, error) {
+                        alert(error);
+                    }
+                })
+            });
+        });
+    </script>
+
+
+    <script src="~/assets/js/bundle5152.js"></script>
+    <script src="~/assets/js/gsap.min5152.js"></script>
+    <script src="~/assets/js/perfect-scrollbar.min5152.js"></script>
+
+
+</body>
+</html>

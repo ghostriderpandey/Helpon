@@ -1,0 +1,64 @@
+﻿@model HelpOn.Models.AppointmentsModel
+
+        @using (Html.BeginForm("Submit_Appointments", "Merchant", FormMethod.Post,new {@id= "SubmitEnquiryForm" }))
+        {
+            <div class="row">
+                <div class="col-md-6">
+                    <label>Name</label>
+                    @Html.TextBoxFor(e => e.Name, new { @class = "form-control", @type = "text" })
+                </div>
+                <div class="col-md-6">
+                    <label>Mobile</label>
+                    @Html.TextBoxFor(e => e.Mobile, new { @class = "form-control", @type = "number" })
+                </div>
+                <div class="col-md-12">
+                    <label>Email</label>
+                    @Html.TextBoxFor(e => e.Email, new { @class = "form-control", @type = "email" })
+                </div>
+                <div class="col-md-12">
+                    <label>Description</label>
+                    @Html.TextAreaFor(e => e.Description, new { @class = "form-control", @type = "date" })
+                </div>
+               
+                <div class="col-md-12">
+                    <br />
+
+                  
+                <input type="hidden" name="MID" value="@ViewBag.MID" />
+                <input type="hidden" name="Type" value="EnquiryNow" />
+                    <input type="submit" class="btn btn-success" value="Submit" id="btnSubmitEnquiryNow" />
+                </div>
+            </div>
+        }
+
+<script>
+    
+    $("#SubmitEnquiryForm").submit(function (e) {
+        e.preventDefault(e);
+        var url = $('#SubmitEnquiryForm')[0].action;
+        $.ajax({
+            type: "POST",
+            url: url,
+            data: $('#SubmitEnquiryForm').serialize(),
+            beforeSend: function () {
+                $("#btnSubmitEnquiryNow").text('Please Wait...');
+            },
+            success: function (data) {
+                if (data.Status > 0) {
+                    swal('Alert', data.Message, 'success').then((value) => { location.reload(); });
+                }
+                else {
+                    swal('Alert', data.Message, 'error');
+                }
+            },
+            complete: function () {
+                $("#btnSubmitEnquiryNow").text('Submit');
+            },
+            error: function (xhr, status, error) {
+                alert(error);
+            }
+        })
+    });
+</script>
+
+

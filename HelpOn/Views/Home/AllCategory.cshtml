@@ -1,0 +1,38 @@
+﻿@model List<HelpOn.Models.CategoryModel>
+@using HelpOn.Helper
+@{
+    ViewBag.Title = "AllCategory";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<section class="section-padding">
+    <div class="container">
+
+        <h4 style="font-family: 'Libre Baskerville', serif;">All Segments</h4>
+        <div class="products column-6 mobile-column-2">
+            
+            @foreach (var Categoryitem in Model)
+            {
+
+                
+                    <div class="product product-type-simple">
+
+                        <div class="product-wrapper product-type-1">
+
+                            <div class="content-wrapper p-0">
+                                <h3 class="product-title text-center p-2" style="background: @Categoryitem.BgColor;border-top-left-radius: 15px;border-top-right-radius: 15px;margin:0;"><a href="/Segment/@Categoryitem.Name.Trim().Replace(" ","-").Replace("&","_")" title="@Categoryitem.Name" style="font-family: 'Libre Baskerville', serif;color: @Categoryitem.FontColor;font-weight: bold;">@Categoryitem.Name</a></h3>
+                            </div>
+                            <div class="thumbnail-wrapper text-center p-0">
+                                <a href="/Segment/@Categoryitem.Name.Trim().Replace(" ","-").Replace("&","_")">
+                                    <img class="img-fluid item-img rounded" alt="@Categoryitem.Name" src="@Application.ImagePath/Category/@Categoryitem.IMG">
+
+                                </a>
+                            </div>
+                        </div>
+
+                    </div>
+                   
+            }
+        </div>
+    </div>
+</section>

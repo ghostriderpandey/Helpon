@@ -1,0 +1,18 @@
+﻿@model HelpOn.Models.SearchModel
+@using (Html.BeginForm("GetMerchantBySearch", "Merchant", FormMethod.Post, new { id = "Experience" }))
+{
+    <div class="input-group">
+        <div class="input-group-prepend">
+            <div class="input-group-prepend">
+                <button type="button" class="klbth-icon-location bg-info"></button>
+            </div>
+           
+            <input type="text" class="border-right Sugetionbox" id="SearchlocationAutofill" data-autofill-values="@ViewBag.State" name="State" placeholder="Jaipur" style="background-color: #cfcece;color: #000;" />
+        </div>
+        <input id="myAutocomplete" class="Sugetionbox" type="text" placeholder="Search for anything, anywhere" data-autofill-values="@ViewBag.Search" name="Name" autocomplete="off" style="font-family: 'Libre Baskerville', serif; border-radius: unset;">
+        <div class="input-group-prepend">
+            <button type="submit" class="bg-info">Search</button>
+        </div>
+    </div>
+}
+

@@ -1,0 +1,298 @@
+﻿@model dynamic
+@using HelpOn.Helper
+<div class="woocommerce">
+    <div class="woocommerce-notices-wrapper"></div>
+    <div class="row content-wrapper sidebar-right">
+        @if (Model.cartitem.Count > 0)
+        {
+            <div class="col-12 col-md-12 col-lg-12 content-primary">
+                <div class="cart-wrapper">
+
+                    <div class="woocommerce-cart-form">
+
+                        <table class="table shop_table shop_table_responsive cart woocommerce-cart-form__contents" cellspacing="0">
+                            <thead>
+                                <tr>
+                                    <th class="product-thumbnail">&nbsp;</th>
+                                    <th class="product-name">Product</th>
+                                    <th class="product-price">Price</th>
+                                    <th class="product-quantity">Quantity</th>
+                                    <th class="product-subtotal">Subtotal</th>
+                                    <th class="product-remove">&nbsp;</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var item in Model.cartitem)
+                                {
+                                    <tr class="woocommerce-cart-form__cart-item cart_item">
+                                        <td class="product-thumbnail">
+                                            <a href="/product/@item.PID">
+                                                <img width="90" height="90" src="@item.IMG" class="attachment-woocommerce_thumbnail size-woocommerce_thumbnail" />
+                                            </a>
+                                        </td>
+                                        <td class="product-name" data-title="Product">
+                                            <a href="/product/@item.PID">@item.Name </a>
+                                        </td>
+                                        <td class="product-price" data-title="Price">
+                                            <span class="woocommerce-Price-amount amount">
+                                                <bdi><span class="woocommerce-Price-currencySymbol">Rs.</span> @item.Price</bdi>
+                                            </span>
+                                        </td>
+                                        <td class="product-quantity">
+                                            <div class="quantity">
+                                                @item.Qty
+                                            </div>
+                                        </td>
+                                        <td class="product-subtotal" data-title="Subtotal">
+                                            <span class="woocommerce-Price-amount amount">
+                                                <bdi><span class="woocommerce-Price-currencySymbol">Rs.</span>@item.TotalPrice</bdi>
+                                            </span>
+                                        </td>
+                                        <td class="product-remove">
+                                            <a href="javascript:void(0)" class="remove" aria-label="Remove this item" data-product_id="@item.PID" onclick="DeleteCart(@item.PID)"><i class="klbth-icon-cancel"></i></a>
+                                        </td>
+                                    </tr>
+                                }
+
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="cart-collaterals">
+                        <div class="cart_totals">
+                            <h2>Cart totals</h2>
+                            <table cellspacing="0" class="shop_table shop_table_responsive">
+                                <tbody>
+                                    <tr>
+                                        <td>
+                                            <input type="text" id="txtCode" placeholder="Do you have Coupon Code ?" />
+                                        </td>
+                                        <td>
+                                            <button id="btnApply" type="button">Apply</button>
+                                        </td>
+                                    </tr>
+                                    <tr class="order-total">
+                                        <th>Total</th>
+                                        <td data-title="Total">
+                                            <strong>
+                                                <span class="woocommerce-Price-amount">
+                                                    <span class="woocommerce-Price-currencySymbol">Rs.</span>
+                                                    @if (ViewBag.TotalAmount != null)
+                                                    {
+                                                        <i>   @ViewBag.TotalAmount</i>
+                                                    }
+
+                                                </span>
+                                            </strong>
+                                        </td>
+                                    </tr>
+                                    <tr class="order-total IsCoupon d-none">
+                                        <th><label id="btnCancelCoupon"><i class="klbth-icon-cancel text-danger"></i> Discount</label></th>
+                                        <td data-title="Total">
+                                            <strong>
+                                                <span class="woocommerce-Price-amount text-success">
+                                                    <span class="woocommerce-Price-currencySymbol">Rs.</span>
+                                                    <span id="spnDiscountCoupon">0.00</span>
+                                                </span>
+                                            </strong>
+                                        </td>
+                                    </tr>
+                                    <tr class="order-total IsCoupon d-none">
+                                        <th>Payble Amount</th>
+                                        <td data-title="Total">
+                                            <strong>
+                                                <span class="woocommerce-Price-amount">
+                                                    <span class="woocommerce-Price-currencySymbol">Rs.</span>
+                                                    <span id="spnPaybleAmount">0.00</span>
+                                                </span>
+                                            </strong>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <div class="wc-proceed-to-checkout">
+
+                                <form action="/Cart/Checkout" method="post" id="Checkoutform" enctype="multipart/form-data">
+                                    <input type="hidden" name="PaymentMode" id="PaymentMode" />
+                                    <input type="hidden" name="MID" id="hdnMID" />
+                                    <label type="button" data-toggle="collapse" class="chkPaymentMode" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne" for="COD">
+                                        <input type="radio" name="Paymentmode" id="COD" /> Cash on Delivery (COD)
+                                    </label>
+                                    <br />
+                                    <label type="button" class="collapsed chkPaymentMode" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo" for="UPI"><input type="radio" name="Paymentmode" id="UPI" /> UPI</label>
+                                    <br />
+                                    <label class="collapsed chkPaymentMode" type="button" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree" for="Bank"><input type="radio" name="Paymentmode" id="Bank" /> Bank Transfer</label>
+                                    <br />
+                                    <div class="accordion" id="accordionExample">
+                                        <div class="card">
+
+                                            <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordionExample">
+
+                                            </div>
+                                        </div>
+                                        <div class="card">
+
+                                            <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample">
+                                                <div class="card-body">
+                                                    <img src="@Model.bankDetail.Qrcode" />
+
+                                                    @*<a href="@Model.bankDetail.UPI" class="bg-success w-100 justify-content-center mt-2">Pay Now</a>*@
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="card">
+
+                                            <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordionExample">
+                                                <div class="card-body">
+                                                    <p>Bankname : @Model.bankDetail.Bankname</p>
+                                                    <p>A/c : @Model.bankDetail.AccountNo</p>
+                                                    <p>IFSC Code : @Model.bankDetail.IFSC</p>
+                                                    <p>Branch : @Model.bankDetail.Branch</p>
+                                                    <p>HolderName : @Model.bankDetail.HolderName</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="d-none" id="divTransactionDetail">
+                                        <label>Transaction No.</label>
+                                        <input type="text" name="TransactionNo" />
+                                        <label>Transaction Screen Shot</label>
+                                        <input type="file" name="Screenshot" id="Screenshot" />
+                                    </div>
+                                    <br />
+
+                                    <textarea placeholder="Shipping Address and Detail" name="Address"></textarea>
+                                    <input type="hidden" name="TotalAmount" id="txtTotalAmount" value="@ViewBag.TotalAmount" />
+                                    <input type="hidden" name="Discount" id="txtDiscount" value="0" />
+                                    <input type="hidden" name="PaybleAmount" id="txtPaybleAmount" value="0" />
+                                    <input type="hidden" name="CouponCode" id="txtCouponCode" value="" />
+                                    <button type="submit" class="checkout-button button alt wc-forward bg-success justify-content-center w-100"> Proceed to checkout</button>
+                                    <br />
+                                    <button type="button" onclick="location.reload();" class="w-100 mt-2 justify-content-center"> Back</button>
+                                </form>
+
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        }
+        else
+        {
+            <div class="col-12 col-md-12 col-lg-12 content-primary text-center">
+                <div class="cart-wrapper justify-content-center">
+                    <img src="~/assets/icon/empty-cart.png" style="width:150px;" />
+
+                </div>
+                <br />
+                <button type="button" onclick="location.reload()" class="checkout-button button alt wc-forward"> Go To Shopping</button>
+            </div>
+        }
+    </div>
+</div>
+<script>
+    $("#hdnMID").val(@ViewBag.MID);
+    $(".chkPaymentMode").each(function () {
+        $(this).click(function () {
+            var mode = $(this).attr('for');
+            if (mode != 'COD') {
+                $("#divTransactionDetail").removeClass("d-none");
+
+            } else {
+                $("#divTransactionDetail").addClass("d-none");
+            }
+            $("#PaymentMode").val(mode);
+        });
+    });
+    $("#Checkoutform").submit(function (e) {
+        e.preventDefault(); // stop the standard form submission
+        $.ajax({
+            url: this.action,
+            type: this.method,
+            data: new FormData(this),
+            cache: false,
+            contentType: false,
+            processData: false,
+            success: function (data) {
+                if (data.Status > 0) {
+                    swal('Alert', data.Message, 'success').then((value) => { location.reload() });
+                }
+                else {
+                    swal('Alert', data.Message, 'error');
+                }
+            },
+            error: function (xhr, error, status) {
+                console.log(error, status);
+            }
+        });
+        //var url = $('#Checkoutform')[0].action;
+        //$.ajax({
+        //    type: "POST",
+        //    url: url,
+        //    data: $('#Checkoutform').serialize(),
+        //    success: function (data) {
+        //        if (data.Status > 0) {
+        //            swal('Alert', data.Message, 'success').then((value) => { location.reload() });
+        //        }
+        //        else {
+        //            swal('Alert', data.Message, 'error');
+        //        }
+        //    },
+        //    error: function (xhr, status, error) {
+        //        alert(error);
+        //    }
+        //});
+    });
+    $("#btnApply").click(function () {
+        var txtCode = $("#txtCode").val();
+        $.ajax({
+            type: "POST",
+            url: "/Cart/ApplyCoupon",
+            data: { 'MID':@ViewBag.MID, 'Code': txtCode },
+            beforeSend: function () {
+                $("#btnApply").text('wait ...');
+                $(".loaderbox").css("display", "flex");
+            },
+            success: function (data) {
+                if (data.Status > 0) {
+                    $("#btnApply").text('Applied');
+                    $("#txtCode").attr('disabled', '');
+                    $("#btnApply").attr('disabled', '');
+                    $("#btnApply").addClass('bg-success');
+
+                    $(".IsCoupon").removeClass('d-none');
+                    $("#spnDiscountCoupon").text(data.Discount);
+                    $("#spnPaybleAmount").text(data.PaybleAmount);
+                    $("#txtPaybleAmount").val(data.PaybleAmount);
+                    $("#txtDiscount").val(data.Discount);
+                    $("#txtCouponCode").val(txtCode);
+                }
+                else {
+                    swal('Alert', data.Message, 'error');
+                }
+            },
+            complete: function () {
+                $("#btnApply").text('Apply');
+                $(".loaderbox").css("display", "none");
+            },
+            error: function (xhr, status, error) {
+                alert(error);
+            }
+        })
+    });
+     $("#btnCancelCoupon").click(function () {
+                        swal({
+                            title: "Are you sure?",
+                            text: "Do you want to Remove Applied Coupon",
+                            icon: "warning",
+                            buttons: true,
+                            dangerMode: true,
+                        })
+                            .then((willDelete) => {
+                                if (willDelete) {
+                                    location.reload();
+                                }
+                            });
+
+    });
+</script>

@@ -1,0 +1,23 @@
+﻿@model HelpOn.Models.MerchantFilterModel
+@using (Html.BeginForm("GetMerchantBySearch", "Merchant", FormMethod.Post, new { id = "filterform" }))
+{
+    <div class="row">
+        <div class="col-md-3">
+            <label>Top Category</label>
+            @Html.DropDownListFor(M => M.TopCategoryID, new SelectList(ViewBag.Category, "Value", "Text"), "--Select--", new { @class = "form-control" })
+        </div>
+        <div class="col-md-3">
+            <label>Category & Sub Category</label>
+            <input type="text" class="form-control Sugetionbox" name="Name" id="txtfilterCategory" data-autofill-values="@ViewBag.Search" />
+        </div>
+        <div class="col-md-3">
+            <label>State & City</label>
+            <input type="text" class="form-control Sugetionbox" id="txtfilterState"  name="State" data-autofill-values="@ViewBag.State" />
+        </div>
+        <div class="col-md-3">
+            <br />
+            <button type="submit" class="btn btn-success">Search</button>
+        </div>
+    </div>
+}
+

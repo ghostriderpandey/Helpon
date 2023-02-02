@@ -1,0 +1,144 @@
+﻿@model List<HelpOn.Models.MyOrderModel>
+@{
+    ViewBag.Title = "MyOrder";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container pt-4">
+    <div class="card">
+        <div class="card-body table-responsive">
+            <h6>My Order</h6>
+            <hr />
+            @if (Model.Count > 0)
+            {
+                <table class="table">
+                    <tr>
+                        <th>Date</th>
+                        <th>Order Status</th>
+                        <th>Merchant</th>
+                        <th>Shop Address</th>
+                        <th>Payment Mode</th>
+                        <th>Shipping Address</th>
+                        <th>View</th>
+                    </tr>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>
+                                <label>@item.OrderDate</label>
+                            </td>
+                            <td>
+                                @if (item.OrderStatus.ToString().ToUpper() == "Shipped".ToUpper())
+                                {
+                                    <label class="alert alert-info">@item.OrderStatus</label>
+                                    <br />
+                                    <label>@item.ShippedRemark</label>
+                                }
+                                else if (item.OrderStatus.ToString().ToUpper() == "Delivered".ToUpper())
+                                {
+                                    <label class="alert alert-success">@item.OrderStatus</label>
+                                    <button type="button" onclick="location.replace('/Invoice/@item.ID')">Invoice</button>
+                                    <br />
+                                    <label>@item.DeliveredRemark</label>
+                                }
+                                else if (item.OrderStatus.ToString().ToUpper() == "Cancelled".ToUpper())
+                                {
+                                    <label class="alert alert-danger">@item.OrderStatus</label>
+                                    <br />
+                                    <label>@item.CancelRemark</label>
+                                }
+                                else
+                                {
+                                    <label class="alert alert-primary">@item.OrderStatus</label>
+                                }
+
+                            </td>
+                            <td>
+                                <h6> @item.ShopName</h6>
+                                <label>@item.MerchantName</label>
+                            </td>
+                            <td>
+                                <label>@item.MerchantAddress</label>
+                            </td>
+                            <td>
+                                <label> @item.PaymentMode</label>
+                                <br />
+                                <label> @item.UPI</label>
+                                <br />
+                                <label> @item.TransactionNo</label>
+                                @if (item.ScreenShot.ToString().Length>40)
+                                {
+                                    <br />
+                                    <a href="@item.ScreenShot">Screen Shot</a>
+                                }
+                            </td>
+                            <td>
+                                <label>
+                                    @item.ShippingAddress
+                                </label>
+                            </td>
+                            <td>
+                                @*<a href="/Order-Product/@item.ID" class="btn bg-success text-white font-weight-bold">View Product</a>*@
+                                <button type="button" data-toggle="collapse" data-target="#collapseProduct_@item.ID" aria-expanded="false" aria-controls="collapseProduct_@item.ID">
+                                    Product
+                                </button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="7">
+                                <div class="collapse" id="collapseProduct_@item.ID">
+                                    <div class="card card-body">
+                                        @if (item.productReports.Count > 0)
+                                        {
+                                            <table class="table">
+                                                <tr>
+
+                                                    <th>Photo</th>
+                                                    <th>Product</th>
+                                                    <th>Amount</th>
+                                                    <th>Total Amount</th>
+                                                </tr>
+                                                @foreach (var product in item.productReports)
+                                                {
+
+
+                                                    <tr>
+
+                                                        <td style="width:150px;">
+                                                            <img src='@product.IMG1' width="100%" />
+                                                        </td>
+                                                        <td>
+                                                            <label>@product.ProductName x @product.Qty</label>
+                                                        </td>
+                                                        <td>
+                                                            <label> @product.Amount</label>
+                                                        </td>
+                                                        <td>
+                                                            <label>
+                                                                @product.NetAmount
+                                                            </label>
+                                                        </td>
+
+                                                    </tr>
+                                                }
+                                            </table>
+
+
+                                        }
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                    }
+                </table>
+
+
+            }
+            else
+            {
+                <a href="/" class="btn btn-success">Continue Shopping</a>
+            }
+
+        </div>
+    </div>
+</div>

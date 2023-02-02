@@ -1,0 +1,76 @@
+﻿@model HelpOn.Models.WebColor
+<div class="header-main header-wrapper" style="background:@Model.BgColor;padding-top:5px;padding-bottom:5px; ">
+    <div class="container">
+        <div class="column column-left">
+            <div class="header-buttons hide-desktop">
+                <div class="header-canvas button-item">
+                    <a href="#">
+                        <i class="klbth-icon-menu-thin"></i>
+                    </a>
+                </div>
+            </div>
+            <div class="site-brand">
+                <a href="/" title="Help on - Reach | Redeem | Repeat">
+                    <img class="desktop-logo hide-mobile" src="~/assets/images/deal_logo.png" alt="Help on Logo | Reach Redeem Repeat">
+                    <img class="mobile-logo hide-desktop" src="~/assets/images/deal_logo.png" alt="Help on Logo | Reach Redeem Repeat">
+                </a>
+            </div>
+        </div>
+        <div class="column column-center hide-mobile">
+
+            @Html.Action("Search", "Home")
+        </div>
+        <div class="column column-right">
+            @if (HelpOn.Helper.SessionHelper.Islogin == false)
+            {
+                <div class="header-buttons" onclick="Loginpopup()">
+
+                    <div class="header-cart button-item bordered">
+
+                        <div class="button-icon"><i class="klbth-icon-user"></i></div>
+
+                    </div>
+                </div>
+            }
+            else
+            {
+                <div class="site-menu primary-menu horizontal p-0">
+                    <ul id="menu-menu-2" class="menu">
+                        <li class="dropdown  menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-has-children p-0">
+                            <a href="javascript:void(0)" style="font-family: 'Libre Baskerville', serif; background: #f0faff; color: #2bbef9;" class="text-capitalize">@Model.Name</a>
+                            <ul class="sub-menu" style="top:40px;z-index:1000;">
+                                <li class=" menu-item menu-item-type-post_type menu-item-object-page menu-item-home">
+                                    <a href="/Profile" style="font-family: 'Libre Baskerville', serif;">My Profile</a>
+                                </li>
+                                <li class=" menu-item menu-item-type-post_type menu-item-object-page menu-item-home">
+                                    <a href="/My-Order" style="font-family: 'Libre Baskerville', serif;">My Order</a>
+                                </li>
+                                <li class=" menu-item menu-item-type-post_type menu-item-object-page menu-item-home">
+                                    <a href="/Logout" style="font-family: 'Libre Baskerville', serif;">Log out</a>
+                                </li>
+
+                            </ul>
+                        </li>
+                        <li class="menu-item menu-item-type-custom menu-item-object-custom p-0 ml-2">
+                            <a href="javascript:void(0)" style="font-family: 'Libre Baskerville', serif; color: #fff;font-weight:500;" class="text-capitalize bg-success"><i class="klbth-icon-wallet-1"></i> @Model.Wallet </a>
+                           
+                        </li>
+                        @*<a href="/Profile">
+            <div class="header-buttons">
+
+                <div class="header-cart button-item bordered">
+
+                    <div class="button-icon"><i class="klbth-icon-user"></i></div>
+
+                </div>
+            </div>
+            <label class="text-white ml-2">@HelpOn.Helper.SessionHelper.Name</label>
+        </a>*@
+                    </ul>
+                </div>
+
+            }
+
+        </div>
+    </div>
+</div>

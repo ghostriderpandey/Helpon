@@ -1,0 +1,152 @@
+﻿@model HelpOn.Models.MerchantViewModel
+@using HelpOn.Helper
+@{
+    ViewBag.Title = "Popular";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<section class="section-padding">
+    <div class="container">
+        <div class="row">
+            <div class="col-xl-12 mb-4 mt-4">
+                <h4 style="font-family: 'Libre Baskerville', serif;">@ViewBag.CategoryName</h4>
+            </div>
+            @if (Model.Category.Count > 0)
+            {
+                <div class="col-md-12">
+                    <div class="elementor-element elementor-element-f9afb9a elementor-widget elementor-widget-bacola-product-grid" data-id="f9afb9a" data-element_type="widget" data-widget_type="bacola-product-grid.default">
+                        <div class="elementor-widget-container">
+                            <div class="site-module module-products">
+
+                                <div class="module-body">
+                                    <div class="products column-6 mobile-column-2">
+
+                                        @foreach (var Categoryitem in Model.Category)
+                                        {
+
+                                            <div class="product product-type-simple">
+                                                <div class="product-wrapper product-type-1">
+
+                                                    <div class="content-wrapper p-0">
+                                                        <h3 class="product-title text-center p-2 m-0" style="background: @Categoryitem.BgColor;border-top-left-radius: 15px;border-top-right-radius: 15px;">
+                                                            <a href="/Popular/@Categoryitem.Name.Trim().Replace(" ","-").Replace("&","_")" title="@Categoryitem.Name" style="font-family: 'Libre Baskerville', serif;color: @Categoryitem.FontColor;font-weight: bold;">@Categoryitem.Name</a>
+                                                        </h3>
+                                                    </div>
+                                                    <div class="thumbnail-wrapper text-center p-0">
+                                                        <a href="/Popular/@Categoryitem.Name.Trim().Replace(" ","-").Replace("&","_")">
+                                                            <img class="img-fluid item-img rounded" alt="@Categoryitem.Name" src="@Application.ImagePath/Category/@Categoryitem.IMG" style=" width: 100%;">
+
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                                <div class="product-content-fade border-info"></div>
+                                            </div>
+
+                                        }
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+            else if (Model.SubCategory.Count > 0)
+            {
+
+                <div class="col-md-12">
+
+                    <div class="elementor-element elementor-element-f9afb9a elementor-widget elementor-widget-bacola-product-grid" data-id="f9afb9a" data-element_type="widget" data-widget_type="bacola-product-grid.default">
+                        <div class="elementor-widget-container">
+                            <div class="site-module module-products">
+
+                                <div class="module-body">
+                                    <div class="products column-6 mobile-column-2">
+
+                                        @foreach (var Categoryitem in Model.SubCategory)
+                                        {
+
+                                            <div class="product product-type-simple">
+                                                <div class="product-wrapper product-type-1">
+
+                                                    <div class="content-wrapper p-0">
+                                                        <h3 class="product-title text-center p-2 m-0" style="background: @Categoryitem.BgColor;border-top-left-radius: 15px;border-top-right-radius: 15px;">
+                                                            <a href="/Popular/@Categoryitem.Name.Trim().Replace(" ","-").Replace("&","_")" title="@Categoryitem.Name" style="font-family: 'Libre Baskerville', serif;color: @Categoryitem.FontColor;font-weight: bold;">@Categoryitem.Name</a>
+                                                        </h3>
+                                                    </div>
+                                                    <div class="thumbnail-wrapper text-center p-0">
+                                                        <a href="/Popular/@Categoryitem.Name.Trim().Replace(" ","-").Replace("&","_")">
+                                                            <img class="img-fluid item-img rounded" alt="@Categoryitem.Name" src="@Application.ImagePath/Category/@Categoryitem.IMG" style=" width: 100%;">
+
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                                <div class="product-content-fade border-info"></div>
+                                            </div>
+
+                                        }
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            }
+            else
+            {
+                <div class="col-md-12 mb-2">
+                    @Html.Action("FilterMerchant", "Merchant")
+                </div>
+                foreach (var ItemMerchant in Model.Merchants)
+                {
+                    <div class="col-xl-3 col-sm-6 mb-4">
+                        <div class="custom-card shadow-sm h-100 stor-card" style="border: 1px solid #ff0080;border-radius: 10px;">
+                            <div class="custom-card-image">
+                                <a href="/Detail/@ItemMerchant.MID" style="color:black">
+
+                                    <img class="img-fluid item-img premiumshop" src="@ItemMerchant.ThumbnailIMG" style="object-fit: fill; height: 180px; width: 100%; border-top-left-radius: 10px; border-top-right-radius: 10px;">
+                                    @*<div class="top-right"><span><img src="/images/paid_member.webp" style="width: 40px;background-color: white;border-radius: 50%;"></span></div>*@
+
+                                </a>
+                            </div>
+                            <div class="p-3">
+                                <div class="custom-card-body">
+                                    <h6 class="mb-0"><a class="text-black" href="/Detail/@ItemMerchant.MID" style="color: black;font-family: 'Libre Baskerville', serif;">@ItemMerchant.Shopname </a></h6>
+                                    <p class="text-gray mb-2 text-muted" style="font-size: 11px; font-family: 'Libre Baskerville', serif; word-break: break-word;">  @ItemMerchant.Shopname,@ItemMerchant.Address,@ItemMerchant.CityName,@ItemMerchant.StateName -@ItemMerchant.Pincode</p>
+                                    <a href="https://www.google.com/maps?q=@ItemMerchant.Shopname.Replace(" ","+")+@ItemMerchant.Address.Replace(" ","+")+@ItemMerchant.CityName.Replace(" ","+")+@ItemMerchant.StateName.Replace(" ","+")+@ItemMerchant.Pincode+" class="eicon-google-maps" target="_blank"> Location</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                }
+            }
+        </div>
+    </div>
+</section>
+<script>
+    $(document).ready(function () {
+        $("#filterform").submit(function (e) {
+            e.preventDefault(e);
+            var url = $('#filterform')[0].action;
+
+            $.ajax({
+                type: "POST",
+                url: url,
+                data: $('#filterform').serialize(),
+                success: function (data) {
+                    $("#renderbody").html('');
+                    $("#renderbody").html(data);
+                },
+                error: function (xhr, status, error) {
+                    alert(error);
+                }
+            })
+        });
+    });
+    $(".Sugetionbox").autofill({
+
+        fullWidth: false,
+        darkMode: true,
+        minCharacters: 1
+    });
+</script>

@@ -1,0 +1,64 @@
+﻿@model HelpOn.Models.AppointmentsModel
+        @using (Html.BeginForm("Submit_Appointments", "Merchant", FormMethod.Post,new {@id= "SubmitAppointment" }))
+        {
+        <div class="row">
+            <div class="col-md-6">
+                <label>Name</label>
+                @Html.TextBoxFor(e => e.Name, new { @class = "form-control", @type = "text" })
+            </div>
+            <div class="col-md-6">
+                <label>Mobile</label>
+                @Html.TextBoxFor(e => e.Mobile, new { @class = "form-control", @type = "number" })
+            </div>
+            <div class="col-md-12">
+                <label>Email</label>
+                @Html.TextBoxFor(e => e.Email, new { @class = "form-control", @type = "email" })
+            </div>
+            <div class="col-md-6">
+                <label>Appointments Date</label>
+                @Html.TextBoxFor(e => e.AppointmentsDate, new { @class = "form-control", @type = "date" })
+            </div>
+            <div class="col-md-6">
+                <label>Appointments Time</label>
+                @Html.TextBoxFor(e => e.AppointmentsTime, new { @class = "form-control", @type = "time" })
+            </div>
+            <div class="col-md-12">
+                <br />
+                
+                @Html.HiddenFor(e => e.MID, new { value = ViewBag.MID })
+            <input type="hidden" name="Type" value="Appointment" />
+                <input type="submit" class="btn btn-success" value="Submit" id="btnSubmitAppointment" />
+            </div>
+        </div>
+        }
+
+<script>
+    $("#MID").val('@ViewBag.MID');
+    
+    $("#SubmitAppointment").submit(function (e) {
+        e.preventDefault(e);
+        var url = $('#SubmitAppointment')[0].action;
+        $.ajax({
+            type: "POST",
+            url: url,
+            data: $('#SubmitAppointment').serialize(),
+            beforeSend: function () {
+                $("#btnSubmitAppointment").text('Please Wait...');
+            },
+            success: function (data) {
+                if (data.Status > 0) {
+                    swal('Alert', data.Message, 'success').then((value) => { location.reload(); });
+                }
+                else {
+                    swal('Alert', data.Message, 'error');
+                }
+            },
+            complete: function () {
+                $("#btnSubmitAppointment").text('Submit');
+            },
+            error: function (xhr, status, error) {
+                alert(error);
+            }
+        })
+    });
+</script>

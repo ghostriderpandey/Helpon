@@ -1,0 +1,191 @@
+﻿@model HelpOn.Models.ProductDetailModel
+    @using HelpOn.Helper
+@{
+    ViewBag.Title = Model.product.Name;
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<main id="main" class="site-primary">
+    <div class="site-content">
+        <div class="homepage-content">
+            <div class="shop-content single-content single-gray">
+                <div class="container">
+                    <nav class="woocommerce-breadcrumb"></nav>
+                    <div class="single-wrapper">
+                       
+                        <div class="woocommerce-notices-wrapper"></div>
+                        <div id="product-430"
+                             class="product type-product post-430 status-publish first instock product_cat-meats-seafood product_tag-chicken product_tag-natural product_tag-organic has-post-thumbnail sale shipping-taxable purchasable product-type-simple">
+                            <div class="product-header">
+                                <h1 class="product_title entry-title" style="font-family: 'Libre Baskerville', serif;">@Model.product.Name</h1>
+                                <div class="product-meta top"></div>
+                            </div>
+                            <div class="product-content">
+                                <div class="row">
+                                    <div class="col col-12 col-lg-5 product-images">
+                                        <div class="woocommerce-product-gallery woocommerce-product-gallery--with-images woocommerce-product-gallery--columns-4 images"
+                                             data-columns="4"
+                                             style="opacity: 1; transition: opacity 0.25s ease-in-out 0s;">
+                                            <div class="product-badges"></div>
+                                            <figure class="woocommerce-product-gallery__wrapper">
+                                                <div data-thumb="@Model.product.IMG1" data-thumb-alt="" class="woocommerce-product-gallery__image">
+                                                    <a href="@Model.product.IMG1">
+                                                        <img width="600"
+                                                             height="540"
+                                                             src="@Model.product.IMG1"
+                                                             class="wp-post-image"
+                                                             alt=""
+                                                             loading="lazy"
+                                                             title="product-image"
+                                                             data-caption=""
+                                                             src="@Model.product.IMG1" />
+                                                    </a>
+                                                </div>
+                                            </figure>
+                                        </div>
+                                    </div>
+                                    <div class="col col-12 col-lg-7 product-detail">
+                                        <div class="column">
+                                            <p class="price">
+                                                <del>
+                                                    <span class="woocommerce-Price-amount amount"><span class="woocommerce-Price-currencySymbol">Rs.</span>@Model.product.MRP</span>
+                                                </del>
+                                                <ins>
+                                                    <span class="woocommerce-Price-amount amount"><span class="woocommerce-Price-currencySymbol">Rs.</span>@Model.product.Price</span>
+                                                </ins>
+                                            </p>
+                                            <div class="product-meta">
+                                                <div class="stock product-available in-stock">
+                                                    <span class="stock in-stock">@Model.product.Discount% off</span>
+                                                </div>
+                                            </div>
+                                            <div class="woocommerce-product-details__short-description product-short-description">
+                                                <p style="font-family: 'Libre Baskerville', serif;" class="text-capitalize">@Model.product.About</p>
+                                            </div>
+                                            <div class="stock product-available in-stock"></div>
+                                            <div class="cart single-ajax">
+                                                @if (Model.product.IsCart > 0)
+                                                {
+                                                    <div class="quantity">
+                                                        <label class="screen-reader-text" for="quantity_62dc60b7d06bd">All Natural Italian-Style Chicken Meatballs quantity</label>
+                                                        <div class="quantity-button minus" onclick="AddToCart(@Model.product.ID,-1)"><i class="klbth-icon-minus"></i></div>
+                                                        <input type="text" id="quantity_62dc60b7d06bd" class="input-text qty text" step="1" min="1" max="10" name="quantity" value="@Model.product.Qty" title="Qty" size="4" placeholder="" inputmode="numeric" />
+                                                        <div class="quantity-button plus" onclick="AddToCart(@Model.product.ID, 1)"><i class="klbth-icon-plus"></i></div>
+                                                    </div>
+                                                }
+                                                else
+                                                {
+                                                    
+                                                    if (Model.product.IsStock > 0)
+                                                    {
+                                                        <button class="single_add_to_cart_button button alt addToCart" onclick="AddToCart(@Model.product.ID,1)" data-id="@Model.product.ID">
+                                                            Add to cart
+                                                        </button>
+                                                    }
+                                                    else
+                                                    {
+                                                        <button class="single_add_to_cart_button btn btn-warning button alt addToCart">
+                                                            Out of Stock
+                                                        </button>
+                                                    }
+                                                }
+                                            </div>
+                                            <hr />
+                                            <div class="product-share">
+                                                <div class="social-share site-social style-1">
+                                                    <p>Share Product on Social Media</p>
+                                                    <ul class="social-container">
+                                                        <li><a href="https://www.facebook.com/share.php?u=http://helpon.in/product/1@Model.product.ID" target="_blank" class="facebook"><i class="klbth-icon-facebook"></i></a></li>
+                                                        <li><a href="http://www.twitter.com/share?url=http://helpon.in/product/@Model.product.ID" target="_blank" class="twitter"><i class="klbth-icon-twitter"></i></a></li>
+                                                        <li><a href="https://www.instagram.com/sharer.php?u=http://helpon.in/product/@Model.product.ID" target="_blank" class="instagram"><i class="klbth-icon-instagram"></i></a></li>
+                                                        <li><a href="whatsapp://send?text=http://helpon.in/product/@Model.product.ID" target="_blank" class="whatsapp"><i class="klbth-icon-whatsapp"></i></a></li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <section class="klb-module site-module recently-viewed" >
+        <div class="card">
+            <div class="card-body" id="partialViewReletive">
+                @Html.Action("_ReletiveProduct", "Merchant")
+            </div>
+        </div>
+        
+    </section>
+</main>
+<script>
+     var Islogin = '@HelpOn.Helper.SessionHelper.Islogin';
+    function AddToCart(p, q) {
+       
+        if (Islogin == 'False') {
+            $('#LoginModalCenter').modal('show');
+            return;
+        }
+        event.preventDefault();
+        var Cart = {
+            PID: p,
+            Qty: q
+        };
+        $.ajax({
+            type: "POST",
+            url: "/Cart/AddToCart",
+            data: JSON.stringify(Cart),
+            dataType: "json",
+            contentType: 'application/json; charset=utf-8',
+            beforeSend: function () {
+                $(".loaderbox").css("display", "flex");
+            },
+            success: function (data) {
+                location.reload();
+            },
+            complete: function () {
+                $(".loaderbox").css("display", "none");
+            },
+            error: function () {
+                alert("Error occured!!")
+            }
+        });
+    }
+     function GetpartialView(e) {
+        var d = {
+            id: @ViewBag.MID
+        };
+        $.ajax({
+            type: "POST",
+            url: e,
+            data: JSON.stringify(d),
+            dataType: "html",
+            contentType: 'application/json; charset=utf-8',
+            beforeSend: function () {
+                $(".loaderbox").css("display", "flex");
+            },
+            success: function (data) {
+                $('#partialViewReletive').html('');
+                $('#partialViewReletive').html(data);
+            },
+            complete: function () {
+                $(".loaderbox").css("display", "none");
+            },
+            error: function () {
+                alert("Error occured!!")
+            }
+        });
+    }
+
+    function GoToCart() {
+        GetpartialView('/Cart/_Cart');
+    }
+    function GoBack() {
+        GetpartialView('/Merchant/_ReletiveProduct');
+    }
+</script>
+
+

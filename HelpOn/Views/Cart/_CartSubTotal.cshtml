@@ -1,0 +1,35 @@
+﻿@model HelpOn.Models.CartTotal
+<tr class="order-total">
+    <th>Total</th>
+    <td data-title="Total">
+        <strong>
+            <span class="woocommerce-Price-amount">
+                <span class="woocommerce-Price-currencySymbol">Rs.</span>@Model.Total
+            </span>
+        </strong>
+    </td>
+</tr>
+@if (Model.Discount > 0)
+{
+    <tr class="order-total">
+        <th><label id="btnCancelCoupon"><i class="klbth-icon-cancel text-danger"></i> Discount</label></th>
+        <td data-title="Total">
+            <strong>
+                <span class="woocommerce-Price-amount text-success">
+                    <span class="woocommerce-Price-currencySymbol">Rs.</span>@Model.Discount
+                </span>
+            </strong>
+        </td>
+    </tr>
+    <tr class="order-total">
+        <th>Payble Amount</th>
+        <td data-title="Total">
+            <strong>
+                <span class="woocommerce-Price-amount">
+                    <span class="woocommerce-Price-currencySymbol">Rs.</span>@Model.PaybleAmount
+                </span>
+            </strong>
+        </td>
+    </tr>
+}
+

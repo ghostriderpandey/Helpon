@@ -1,0 +1,148 @@
+﻿@model HelpOn.Models.CustomerModel
+
+<!-- Modal -->
+<div class="modal fade" id="LoginModalCenter" tabindex="-1" role="dialog" aria-labelledby="LoginModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-body p-0">
+                <nav>
+                    <div class="nav nav-tabs" id="nav-tab" role="tablist">
+                        <button class="nav-link active w-50 btnAction" data-name="login" id="nav-home-tab" data-bs-toggle="tab" data-bs-target="#nav-home" type="button" role="tab" aria-controls="nav-home" aria-selected="true">Login</button>
+                       
+                        <button class="nav-link w-50 btnAction" data-name="Signup" id="nav-profile-tab" data-bs-toggle="tab" data-bs-target="#nav-profile" type="button" role="tab" aria-controls="nav-profile" aria-selected="false">Signup</button>
+
+                    </div>
+                </nav>
+                <div class="tab-content" id="nav-tabContent">
+                    <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
+                        @using (Html.BeginForm("CustomerLogin", "Account", FormMethod.Post, new { id = "loginform" }))
+                        {
+                            <div class="card">
+                                <div class="card-body">
+                                    <label>Email/Mobile</label>
+                                    @Html.TextBoxFor(e => e.Mobile, new { @class = "form-control", @placeholder = "Enter Email / mobile" })
+                                    <label>Password</label>
+                                    @Html.TextBoxFor(e => e.Password, new { @class = "form-control", @type = "Password", @placeholder = "**********" })
+                                    <br />
+                                    <label for="IsRemeber" id="IsRemeberSET">@Html.CheckBoxFor(e=>e.IsRemeber) Remeber Me</label>
+                                    @Html.HiddenFor(e => e.Type, new { @value = "login", @id = "hdnTypelogin" })
+                                    <button type="submit" class="btn btn-success w-100 mt-2" id="btnLogin">Login</button>
+                                </div>
+                            </div>
+                        }
+                    </div>
+                    <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
+                        @using (Html.BeginForm("CustomerLogin", "Account", FormMethod.Post, new { id = "Signupform" }))
+                        {
+                            <div class="card">
+                                <div class="card-body">
+                                    <label>Name</label>
+                                    @Html.TextBoxFor(e => e.Name, new { @class = "form-control", @placeholder = "Enter Name" })
+                                    <label>Mobile</label>
+                                    @Html.TextBoxFor(e => e.Mobile, new { @class = "form-control", @placeholder = "Enter Mobile" })
+                                    <label>Email</label>
+                                    @Html.TextBoxFor(e => e.Email, new { @class = "form-control", @placeholder = "Enter Email" })
+                                    <label>Password</label>
+                                    @Html.TextBoxFor(e => e.Password, new { @class = "form-control", @type = "Password", @placeholder = "**********" })
+                                    @Html.HiddenFor(e => e.Type, new { @value = "Signup", @id = "hdnTypeSignup" })
+                                    <button type="submit" class="btn btn-success w-100 mt-2">Sign up</button>
+                                </div>
+                            </div>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    $("#hdnTypelogin").val('login');
+    $("#hdnTypeSignup").val('Signup');
+    $(".btnAction").each(function () {
+        $(this).click(function () {
+            $(".btnAction").removeClass('active');
+            var name = $(this).attr('data-name');
+            if (name == 'login') {
+                $("#nav-profile").removeClass("show active");
+                $("#nav-home").removeClass("show active");
+                $("#nav-home").addClass("show active");
+            }
+            else if (name == 'Signup') {
+                $("#nav-profile").removeClass("show active");
+                $("#nav-home").removeClass("show active");
+                $("#nav-profile").addClass("show active");
+            }
+            $(this).addClass("active");
+        });
+    });
+    $("#IsRemeberSET").click(function () {
+        if ($('#IsRemeber').is(':checked')) {
+            // save username and password
+            var Mobile = $("#Mobile").val();
+            var Password = $("#Password").val();
+
+            localStorage.setItem("username", Mobile);
+            localStorage.setItem("pass", Password);
+           
+        } else {
+            localStorage.clear();
+        }
+        
+    });
+   
+    var username = localStorage.getItem("username");
+    if (username != null) {
+        $("#Mobile").val(localStorage.getItem("username"));
+        $("#Password").val(localStorage.getItem("pass"));
+        $("#IsRemeber").attr('checked','checked');
+    }
+    $(document).ready(function () {
+        $("#loginform").submit(function (e) {
+            e.preventDefault(e);
+            var url = $('#loginform')[0].action;
+           
+            $.ajax({
+                type: "POST",
+                url: url,
+                data: $('#loginform').serialize(),
+                beforeSend: function(){
+                    $("#btnLogin").text('Please Wait');
+                },
+                success: function (data) {
+                    if (data.Status > 0) {
+                        location.reload();
+                    }
+                    else {
+                        swal('Alert', data.Message, 'error');
+                    }
+                },
+                complete: function () {
+                    $("#btnLogin").text('Login');
+                },
+                error: function (xhr, status, error) {
+                    alert(error);
+                }
+            })
+        });
+        $("#Signupform").submit(function (e) {
+            e.preventDefault(e);
+            var url = $('#Signupform')[0].action;
+            $.ajax({
+                type: "POST",
+                url: url,
+                data: $('#Signupform').serialize(),
+                success: function (data) {
+                    if (data.Status > 0) {
+                        swal('Alert', data.Message, 'success').then((value) => { location.reload(); });
+                    }
+                    else {
+                        swal('Alert', data.Message, 'error');
+                    }
+                },
+                error: function (xhr, status, error) {
+                    alert(error);
+                }
+            })
+        });
+    });
+</script>

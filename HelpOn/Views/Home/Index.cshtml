@@ -1,0 +1,627 @@
+﻿@model HelpOn.Models.HomeModel
+@using HelpOn.Helper
+@{
+    ViewBag.Title = "Home";
+}
+
+<style>
+    .hom-cre-acc-left h3 {
+        font-weight: 100;
+        font-size: 34px;
+    }
+
+        .hom-cre-acc-left h3 span {
+            text-transform: capitalize;
+            font-weight: 600;
+            font-size: 42px;
+            color: #333;
+        }
+
+    .hom-cre-acc-left p {
+        padding-top: 8px;
+        font-size: 13px;
+    }
+
+    .hom-cre-acc-left ul {
+        padding: 0;
+        margin-bottom: 0;
+    }
+
+        .hom-cre-acc-left ul li {
+            list-style-type: none;
+        }
+
+            .hom-cre-acc-left ul li img {
+                text-align: center;
+                float: left;
+                width: 50px;
+            }
+
+            .hom-cre-acc-left ul li div {
+                display: block;
+                margin-left: 80px;
+                margin-top: -10px;
+            }
+
+    .hom-cre-acc-left h5 {
+        font-weight: 700;
+        font-size: 20px;
+    }
+
+    .web-app {
+        background: url(../assets/icon/city.png) bottom center;
+        background-size: 100%;
+        position: relative;
+        overflow: hidden;
+        background-repeat-y: no-repeat;
+    }
+
+    .com-padd {
+        padding: 30px 0;
+    }
+
+    .web-app:before {
+        content: '';
+        position: absolute;
+        background: linear-gradient(to top, rgba(255, 255, 255, .68) 0, rgba(255, 255, 255, .8) 100%);
+        top: 0;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+    }
+
+    .web-app-con h2 {
+        font-weight: 100;
+        font-size: 34px;
+    }
+
+        .web-app-con h2 span {
+            font-family: Lato, sans-serif;
+            text-transform: capitalize;
+            font-weight: 600;
+            font-size: 42px;
+            color: #333;
+        }
+
+    .web-app-con span {
+        color: #333;
+        font-size: 16px;
+        padding-bottom: 15px;
+        display: inline-block;
+    }
+
+    .web-app-con ul {
+        padding: 10px 0;
+    }
+
+        .web-app-con ul li {
+            list-style-type: none;
+            font-size: 18px;
+            line-height: 34px;
+        }
+
+            .web-app-con ul li i {
+                color: #01a0d8;
+                margin-right: 5px;
+            }
+
+    .web-app-con span {
+        color: #333;
+        font-size: 16px;
+        padding-bottom: 15px;
+        display: inline-block;
+    }
+
+    .web-app-con form {
+        position: relative;
+        overflow: hidden;
+        margin-bottom: 20px;
+        margin-top: 8px;
+    }
+
+        .web-app-con form ul {
+            padding: 0;
+            margin: 0;
+        }
+
+            .web-app-con form ul li:nth-child(1) {
+                width: 10%;
+            }
+
+            .web-app-con form ul li {
+                list-style-type: none;
+                display: inline-block;
+                float: left;
+            }
+
+                .web-app-con form ul li input {
+                    width: 100%;
+                    background: #fff;
+                    border: 1px solid #f1f3f5;
+                    padding: 8px;
+                    font-size: 15px;
+                }
+
+                .web-app-con form ul li:nth-child(2) {
+                    width: 60%;
+                }
+
+                .web-app-con form ul li:nth-child(3) {
+                    width: 30%;
+                }
+
+                .web-app-con form ul li input[type=submit] {
+                    color: #fff;
+                    border: -1px solid #1ebef0;
+                    font-weight: 600;
+                    border-radius: 2px;
+                    box-sizing: border-box;
+                    -moz-box-sizing: border-box;
+                    -webkit-box-sizing: border-box;
+                    background: #01a0d8;
+                    background: linear-gradient(to bottom, #01a0d8, #0485b3);
+                }
+</style>
+<main id="main" class="site-primary">
+    <div class="site-content">
+        <div class="homepage-content">
+            <div data-elementor-type="wp-page" data-elementor-id="50" class="elementor elementor-50">
+                <section class="elementor-section elementor-top-section elementor-element elementor-section-height-min-height elementor-section-items-stretch elementor-section-boxed elementor-section-height-default" data-id="a406213" data-element_type="section">
+                    <div class="">
+                        @*<div class="elementor-column elementor-col-50 elementor-top-column elementor-element elementor-element-b471779 elementor-hidden-tablet elementor-hidden-phone" data-id="b471779" data-element_type="column">
+                                <div class="elementor-widget-wrap"></div>
+                            </div>*@
+                        <div class="elementor-column elementor-col-100 elementor-top-column elementor-element" data-id="c4ab63a" data-element_type="column">
+                            <div class="elementor-widget-wrap elementor-element-populated">
+                                <div class="elementor-element elementor-element-2d45915 elementor-widget elementor-widget-bacola-home-slider" data-id="2d45915" data-element_type="widget" data-widget_type="bacola-home-slider.default">
+                                    <div class="elementor-widget-container">
+                                        <div class="site-module module-slider equal-height">
+                                            <div class="module-body">
+                                                <div class="slider-wrapper slider-loaded">
+                                                    <div class="carousel slide" data-ride="carousel" id="carouselSliderControls">
+                                                        <div class="carousel-inner">
+                                                            @{ int i = 1;}
+                                                            @foreach (var itemSlider in Model.sliders)
+                                                            {
+                                                                if (i == 1)
+                                                                {
+                                                                    <div class="carousel-item active">
+                                                                        <img src="@Application.ImagePath/Slide/Actual/@itemSlider.Img" class="d-block w-100" alt="...">
+                                                                    </div>
+                                                                }
+                                                                else
+                                                                {
+                                                                    <div class="carousel-item">
+                                                                        <img src="@Application.ImagePath/Slide/Actual/@itemSlider.Img" class="d-block w-100" alt="...">
+                                                                    </div>
+                                                                }
+                                                                i++;
+                                                            }
+
+
+                                                        </div>
+                                                        <a class="carousel-control-prev" href="#carouselSliderControls" role="button" data-slide="prev">
+                                                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                                            <span class="sr-only">Previous</span>
+                                                        </a>
+                                                        <a class="carousel-control-next" href="#carouselSliderControls" role="button" data-slide="next">
+                                                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                                            <span class="sr-only">Next</span>
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                <section class="elementor-section elementor-top-section elementor-element elementor-element-057d4fb elementor-reverse-mobile elementor-section-boxed elementor-section-height-default elementor-section-height-default" data-id="057d4fb" data-element_type="section">
+                    <div class="elementor-container elementor-column-gap-extended">
+
+                        <div class="elementor-column elementor-top-column elementor-element" data-id="9a40b7e" data-element_type="column">
+                            <div class="elementor-widget-wrap elementor-element-populated">
+
+
+                                <div class="elementor-element elementor-element-f9afb9a elementor-widget elementor-widget-bacola-product-grid" data-id="f9afb9a" data-element_type="widget" data-widget_type="bacola-product-grid.default">
+                                    <div class="elementor-widget-container">
+                                        <div class="site-module module-products">
+                                            <div class="module-header">
+                                                <div class="column">
+                                                    <h5 class="entry-title text-capitalize" style="font-family: 'Libre Baskerville', serif;">Popular Segments</h5>
+
+                                                </div>
+
+                                            </div>
+                                            <div class="module-body">
+                                                <div class="products column-6 mobile-column-2">
+                                                    @foreach (var popularitem in Model.popularCategories)
+                                                    {
+                                                        <div class="product product-type-simple" style="border-radius:5px;">
+                                                            <div class="product-wrapper product-type-1">
+                                                                <div class="content-wrapper p-0">
+
+                                                                    <h3 class="product-title text-center p-2 m-0" style="background: #000;border-top-left-radius: 15px;border-top-right-radius: 15px;">
+                                                                        <a href="Javascript:void(0)" title="India Top" >@popularitem.Name</a>
+                                                                    </h3>
+                                                                </div>
+                                                                <div class="thumbnail-wrapper text-center p-0">
+                                                                    <a href="/Popular/@popularitem.Name.Trim().Replace(" ","-").Replace("&","_")">
+                                                                        <img class="img-fluid item-img rounded" alt="Automobile" src="@Application.ImagePath/Icon/@popularitem.IMG">
+
+                                                                    </a>
+
+                                                                </div>
+
+                                                            </div>
+                                                        </div>
+                                                    }
+
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="elementor-element elementor-element-f9afb9a elementor-widget elementor-widget-bacola-product-grid" data-id="f9afb9a" data-element_type="widget" data-widget_type="bacola-product-grid.default">
+                                    <div class="elementor-widget-container">
+                                        <div class="site-module module-products">
+                                            <div class="module-header">
+                                                <div class="column">
+                                                    <h5 class="entry-title text-capitalize" style="font-family: 'Libre Baskerville', serif;">Our Segments</h5>
+                                                    <div class="entry-description" style="font-family: 'Merienda One', cursive;">Dealing in 40+ segments</div>
+                                                </div>
+                                                @*<div class="column"><a href="exclusive-deals-and-offers.html" class="button button-info-default xsmall rounded" style="font-family: 'Libre Baskerville', serif;">View All <i class="klbth-icon-right-arrow"></i></a></div>*@
+                                            </div>
+                                            <div class="module-body">
+                                                <div class="products column-6 mobile-column-2">
+                                                    @{ int j = 1;}
+                                                    @foreach (var Categoryitem in Model.categories)
+                                                    {
+
+                                                        if (j <= 12)
+                                                        {
+                                                            <div class="product product-type-simple">
+
+                                                                <div class="product-wrapper product-type-1">
+
+                                                                    <div class="content-wrapper p-0">
+                                                                        <h3 class="product-title text-center p-2" style="background: @Categoryitem.BgColor;border-top-left-radius: 15px;border-top-right-radius: 15px;margin:0;"><a href="/Segment/@Categoryitem.Name.Trim().Replace(" ","-").Replace("&","_")" title="@Categoryitem.Name" style="color: @Categoryitem.FontColor;">@Categoryitem.Name</a></h3>
+                                                                    </div>
+                                                                    <div class="thumbnail-wrapper text-center p-0">
+                                                                        <a href="/Segment/@Categoryitem.Name.Trim().Replace(" ","-").Replace("&","_")">
+                                                                            <img class="img-fluid item-img rounded" alt="@Categoryitem.Name" src="@Application.ImagePath/Category/@Categoryitem.IMG">
+
+                                                                        </a>
+                                                                    </div>
+                                                                </div>
+
+                                                            </div>
+                                                            j++;
+                                                        }
+                                                    }
+                                                </div>
+                                                <div class="container p-1">
+                                                    <div class="row">
+                                                        <div class="col-md-8 Home_BannerSize">
+                                                            <img src="@Application.ImagePath/Slide/Compress/@Model.Banner1" style="height:100%;border-radius:10px;" />
+                                                        </div>
+                                                        <div class="col-md-4 pl-md-0">
+                                                            <video controls="controls" style="object-fit:cover;border-radius:10px;">
+                                                                <source src="@Application.ImagePath/Slide/Actual/@Model.Video1" type="video/mp4" />
+                                                            </video>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="products column-6 mobile-column-2">
+
+                                                    @foreach (var Categoryitem in Model.categories)
+                                                    {
+
+                                                        if (j <Categoryitem.ID-2 && j <= 24)
+                                                        {
+                                                            <div class="product product-type-simple">
+
+                                                                <div class="product-wrapper product-type-1">
+
+                                                                    <div class="content-wrapper p-0">
+                                                                        <h3 class="product-title text-center p-2" style="background: @Categoryitem.BgColor;border-top-left-radius: 15px;border-top-right-radius: 15px;margin:0;"><a href="/Segment/@Categoryitem.Name.Trim().Replace(" ","-").Replace("&","_")" title="@Categoryitem.Name" style="color: @Categoryitem.FontColor;">@Categoryitem.Name</a></h3>
+                                                                    </div>
+                                                                    <div class="thumbnail-wrapper text-center p-0">
+                                                                        <a href="/Segment/@Categoryitem.Name.Trim().Replace(" ","-").Replace("&","_")">
+                                                                            <img class="img-fluid item-img rounded" alt="@Categoryitem.Name" src="@Application.ImagePath/Category/@Categoryitem.IMG">
+
+                                                                        </a>
+                                                                    </div>
+                                                                </div>
+
+                                                            </div>
+                                                            j++;
+                                                        }
+
+
+
+                                                    }
+                                                </div>
+                                                <div class="container p-1">
+
+                                                    <div class="row">
+                                                        <div class="col-md-4">
+
+                                                            <video controls="controls" style="object-fit:cover;border-radius:10px;">
+                                                                <source src="@Application.ImagePath/Slide/Actual/@Model.Video2" type="video/mp4" />
+                                                            </video>
+                                                        </div>
+                                                        <div class="col-md-8 pl-md-0 Home_BannerSize">
+                                                            <img src="@Application.ImagePath/Slide/Compress/@Model.Banner2" style="height:100%;border-radius:10px;" />
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="products column-6 mobile-column-2">
+
+                                                    @foreach (var Categoryitem in Model.categories)
+                                                    {
+
+                                                        if (j < (Categoryitem.ID-4) && j <= 36)
+                                                        {
+                                                            <div class="product product-type-simple">
+
+                                                                <div class="product-wrapper product-type-1">
+
+                                                                    <div class="content-wrapper p-0">
+                                                                        <h3 class="product-title text-center p-2" style="background: @Categoryitem.BgColor;border-top-left-radius: 15px;border-top-right-radius: 15px;margin:0;"><a href="/Segment/@Categoryitem.Name.Trim().Replace(" ","-").Replace("&","_")" title="@Categoryitem.Name" style="color: @Categoryitem.FontColor;">@Categoryitem.Name</a></h3>
+                                                                    </div>
+                                                                    <div class="thumbnail-wrapper text-center p-0">
+                                                                        <a href="/Segment/@Categoryitem.Name.Trim().Replace(" ","-").Replace("&","_")">
+                                                                            <img class="img-fluid item-img rounded" alt="@Categoryitem.Name" src="@Application.ImagePath/Category/@Categoryitem.IMG">
+
+                                                                        </a>
+                                                                    </div>
+                                                                </div>
+
+                                                            </div>
+                                                            j++;
+                                                        }
+
+
+
+                                                    }
+                                                </div>
+                                                <div class="container p-1">
+                                                    <div class="row">
+                                                        <div class="col-md-8 Home_BannerSize" >
+                                                            <img src="@Application.ImagePath/Slide/Compress/@Model.Banner3" style="height:100%;border-radius:10px;" />
+                                                        </div>
+                                                        <div class="col-md-4 pl-md-0">
+                                                            <video controls="controls" style="object-fit:cover;border-radius:10px;">
+                                                                <source src="@Application.ImagePath/Slide/Actual/@Model.Video3" type="video/mp4" />
+                                                            </video>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <a href="/Segments" class="btn btn-block border w-lg-25 m-auto bg-dark text-white font-weight-bold">Load More</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                <footer class="site-footer mt-2">
+                    <div class="footer-iconboxes" style="background: #47aff373;">
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="card">
+                                        <div class="card-body" style="background: #262e3e; border-radius: 4px; box-shadow: 0 2px 15px -5px rgb(0 0 0 / 76%);">
+                                            <h5 class="text-center text-white">Quick Service request</h5>
+                                            <form action="/Home/RequestForm" method="post" id="RequestForm">
+                                                <div class="row">
+                                                    <div class="col-md-12 mt-2">
+                                                        <input type="text" class="form-control" placeholder="Name" name="Name" />
+                                                    </div>
+                                                    <div class="col-md-12 mt-4">
+                                                        <input type="text" class="form-control" placeholder="Mobile" name="Mobile" />
+                                                    </div>
+                                                    <div class="col-md-12 mt-4">
+                                                        <input type="text" class="form-control" placeholder="Email" name="Email" />
+                                                    </div>
+                                                    <div class="col-md-12 mt-4">
+                                                        <input type="text" class="form-control" placeholder="Enter Your Service" name="Service" />
+                                                    </div>
+                                                    <div class="col-md-12 mt-4">
+                                                        <button type="submit" class="btn btn-primary w-100" id="btnSendrequest">Send Request</button>
+                                                    </div>
+
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="hom-cre-acc-left">
+                                        <h3>What service do you need? <span>Business Directory</span></h3>
+                                        <p>Tell us more about your requirements so that we can connect you to the right service provider.</p>
+                                        <ul>
+                                            <li>
+                                               
+                                                <img src="~/assets/icon/7.png" />
+                                                <div>
+                                                    <h5>Tell us more about your requirements</h5>
+                                                    <p>Imagine you have made your presence online through a local online directory, but your competitors have..</p>
+                                                </div>
+                                            </li>
+                                            <li>
+                                                <img src="~/assets/icon/5.png" />
+                                                <div>
+                                                    <h5>We connect with right service provider</h5>
+                                                    <p>Advertising your business to area specific has many advantages. For local businessmen, it is an opportunity..</p>
+                                                </div>
+                                            </li>
+                                            <li>
+                                                <img src="~/assets/icon/6.png" />
+                                                <div>
+                                                    <h5>Happy with our service</h5>
+                                                    <p>Your local business too needs brand management and image making. As you know the local market..</p>
+                                                </div>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </footer>
+                <footer class="site-footer mt-2 web-app com-padd">
+                    <div class="container">
+
+                        <div class="row">
+
+                            <div class="col-md-6 text-center">
+                                <img src="~/assets/images/icon/mobile.png" />
+                               
+                            </div>
+
+                            <div class="col-md-6 web-app-con">
+
+                                <h2>Looking for the Best Service Provider? <span>Get the App!</span></h2>
+
+                                <ul>
+
+                                    <li><i class="fa fa-check" aria-hidden="true"></i> Find nearby listings</li>
+
+                                    <li><i class="fa fa-check" aria-hidden="true"></i> Easy service enquiry</li>
+
+                                    <li><i class="fa fa-check" aria-hidden="true"></i> Listing reviews and ratings</li>
+
+                                    <li><i class="fa fa-check" aria-hidden="true"></i> Manage your listing, enquiry and reviews</li>
+
+                                </ul> <span>We'll send you a link, open it on your phone to download the app</span>
+
+                                <form class="ng-pristine ng-valid">
+
+                                  
+                                    <div class="row">
+                                        <div class="col-7">
+                                            <input type="number" placeholder="+91 Enter mobile number">
+                                        </div>
+                                        <div class="col-5 p-0">
+                                            <button type="button" style="font-size:14px;border-radius:8px;">Get App Link</button>
+                                        </div>
+                                        <div class="col-6 mt-2">
+                                            <img src="~/assets/icon/android.png" width="100%" />
+                                        </div>
+                                        <div class="col-6 mt-2">
+                                            <img src="~/assets/icon/apple.png" width="100%" />
+                                        </div>
+                                    </div>
+                                </form>
+
+                             
+                            </div>
+
+                        </div>
+
+                    </div>
+                </footer>
+                <footer class="site-footer mt-2">
+                    <div class="footer-iconboxes" style="background: #47aff373;">
+                        <div class="container">
+                            <h4 class="text-center"> Popular Localities</h4>
+                            <div class="owl-carousel">
+                                @foreach (var popularcity in Model.popularCities)
+                                {
+                                    <div class="products">
+                                        <div class="product product-type-simple" style="border-radius: 10px;border-color: orange;">
+                                            <div class="product-wrapper product-type-1 border-0">
+                                                <div class="content-wrapper p-0">
+                                                    <h3 class="product-title text-center p-2" style="background: #fff; margin: 0;">
+                                                        <a href="/Segment/@popularcity.Name.Trim().Replace(" ","-").Replace("&","_")" style="color: #000;">@popularcity.Name</a>
+                                                    </h3>
+                                                </div>
+                                                <div class="thumbnail-wrapper text-center p-0">
+                                                    <a href="/Segment/@popularcity.Name.Trim().Replace(" ","-").Replace("&","_")">
+                                                        <img class="img-fluid item-img rounded" alt="" src="@Application.ImagePath/Category/@popularcity.IMG">
+
+                                                    </a>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                }
+
+
+                            </div>
+                        </div>
+                    </div>
+                </footer>
+            </div>
+        </div>
+    </div>
+</main>
+<script>
+    $(document).ready(function () {
+        $('.owl-carousel').owlCarousel({
+            loop: true,
+            lazyLoad: true,
+            margin: 10,
+            responsiveClass: true,
+            nav: true,
+            autoplay: true,
+            autoplayTimeout: 1000,
+            autoplayHoverPause: true,
+            responsive: {
+                0: {
+                    items: 2,
+                    nav: true
+                },
+                600: {
+                    items: 5,
+                    nav: false
+                },
+                1000: {
+                    items: 8,
+                    nav: true,
+                    loop: false
+                }
+            }
+        });
+        $("#RequestForm").submit(function (e) {
+            e.preventDefault(e);
+            var url = $('#RequestForm')[0].action;
+            $.ajax({
+                type: "POST",
+                url: url,
+                data: $('#RequestForm').serialize(),
+                beforeSend: function () {
+                    $("#btnSendrequest").text('Please Wait');
+                },
+                success: function (data) {
+                    if (data.Status > 0) {
+                        swal('Alert', data.Message, 'success').then((value) => { location.reload();});
+                        
+                    }
+                    else {
+                        swal('Alert', data.Message, 'error');
+                    }
+                },
+                complete: function () {
+                    $("#btnSendrequest").text('Send Request');
+                },
+                error: function (xhr, status, error) {
+                    alert(error);
+                }
+            });
+        });
+    });
+  
+</script>
+<script>
+
+</script>

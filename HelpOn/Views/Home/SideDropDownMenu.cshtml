@@ -1,0 +1,20 @@
+﻿@model List<HelpOn.Models.CategoryModel>
+@using HelpOn.Helper
+<ul id="menu-sidebar-menu-1" class="menu-list">
+    @{ int i = 0;}
+    @foreach (var item in Model)
+    {
+        i++;
+        if (i <= 12)
+        {
+            <li style="font-family: 'Libre Baskerville', serif;" class="text-capitalize category-parent  menu-item menu-item-type-taxonomy menu-item-object-product_cat current-product-ancestor current-menu-parent current-product-parent">
+                <a href="/Segment/@item.Name.Trim().Replace(" ","-").Replace("&","_")">
+                    <img src="@Application.ImagePath/Category/@item.IMG" alt="@item.Name" style="width: 20px;height:20px"> <span style="margin-left: 10px;"> @item.Name</span>
+
+                </a>
+            </li>
+        }
+
+    }
+    <li style="font-family: 'Libre Baskerville', serif;" class="text-capitalize category-parent  menu-item menu-item-type-taxonomy menu-item-object-product_cat current-product-ancestor current-menu-parent current-product-parent"><a href="/Segments"> <i class="klbth-icon-right-arrow"></i><span style="margin-left: 10px;"> More...</span></a></li>
+</ul>

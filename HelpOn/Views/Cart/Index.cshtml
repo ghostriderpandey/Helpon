@@ -1,0 +1,126 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<main id="main" class="site-primary">
+    <div class="site-content">
+        <div class="homepage-content">
+            <div class="shop-content">
+                <div class="container">
+                    <nav class="woocommerce-breadcrumb">
+                        <ul>
+                            <li><a href="/">Home</a></li>
+                            <li>Cart</li>
+                        </ul>
+                    </nav>
+                    <div class="woocommerce">
+                        <div class="woocommerce-notices-wrapper"></div>
+                        <div class="row content-wrapper sidebar-right">
+                            <div class="col-12 col-md-12 col-lg-12 content-primary">
+                                <div class="cart-wrapper">
+                                    <form class="woocommerce-cart-form" action="https://klbtheme.com/bacola/cart/" method="post">
+                                        <table class="table shop_table shop_table_responsive cart woocommerce-cart-form__contents" cellspacing="0">
+                                            <thead>
+                                                <tr>
+                                                    <th class="product-thumbnail">&nbsp;</th>
+                                                    <th class="product-name">Product</th>
+                                                    <th class="product-price">Price</th>
+                                                    <th class="product-quantity">Quantity</th>
+                                                    <th class="product-subtotal">Subtotal</th>
+                                                    <th class="product-remove">&nbsp;</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr class="woocommerce-cart-form__cart-item cart_item">
+                                                    <td class="product-thumbnail">
+                                                        <a href="/product?id=2227">
+                                                            <img width="90"
+                                                                 height="90"
+                                                                 src="https://www.Help on.com/images/1662816251222.image"
+                                                                 class="attachment-woocommerce_thumbnail size-woocommerce_thumbnail"
+                                                                 alt=""
+                                                                 loading="lazy"
+                                                                 srcset="
+                                                                    https://www.Help on.com/images/1662816251222.image  90w,
+                                                                    https://www.Help on.com/images/1662816251222.image 150w,
+                                                                    https://www.Help on.com/images/1662816251222.image 450w,
+                                                                    https://www.Help on.com/images/1662816251222.image 600w,
+                                                                    https://www.Help on.com/images/1662816251222.image  96w
+                                                                "
+                                                                 sizes="(max-width: 90px) 100vw, 90px" />
+                                                        </a>
+                                                    </td>
+                                                    <td class="product-name" data-title="Product">
+                                                        <a href="/product?id=2227">cake </a>
+                                                    </td>
+                                                    <td class="product-price" data-title="Price">
+                                                        <span class="woocommerce-Price-amount amount">
+                                                            <bdi><span class="woocommerce-Price-currencySymbol">Rs.</span> 298</bdi>
+                                                        </span>
+                                                    </td>
+                                                    <td class="product-quantity" data-title="Quantity">
+                                                        <div class="quantity">
+                                                            <label class="screen-reader-text" for="quantity_62dbf4cb6bf15">100% Butter French Croissants quantity</label>
+                                                            <div class="quantity-button minus" categoryid="26" availablequantity="1" booking_id="2227" number="" price="298" value="1"><i class="klbth-icon-minus"></i></div>
+                                                            <input type="text"
+                                                                   id="quantity_62dbf4cb6bf15"
+                                                                   class="input-text qty text"
+                                                                   step="1"
+                                                                   min="0"
+                                                                   max=""
+                                                                   name="cart[a96b65a721e561e1e3de768ac819ffbb][qty]"
+                                                                   value="1"
+                                                                   title="Qty"
+                                                                   size="4"
+                                                                   placeholder=""
+                                                                   inputmode="numeric" />
+                                                            <div class="quantity-button plus" categoryid="26" availablequantity="1" booking_id="2227" number="" price="298" value="1"><i class="klbth-icon-plus"></i></div>
+                                                        </div>
+                                                    </td>
+                                                    <td class="product-subtotal" data-title="Subtotal">
+                                                        <span class="woocommerce-Price-amount amount">
+                                                            <bdi><span class="woocommerce-Price-currencySymbol">Rs.</span>298</bdi>
+                                                        </span>
+                                                    </td>
+                                                    <td class="product-remove">
+                                                        <a href="/remove_item?id=1029" class="remove" aria-label="Remove this item" data-product_id="409" data-product_sku="VUYT31"><i class="klbth-icon-cancel"></i></a>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </form>
+                                    <div class="cart-collaterals">
+                                        <div class="cart_totals">
+                                            <h2>Cart totals</h2>
+                                            <table cellspacing="0" class="shop_table shop_table_responsive">
+                                                <tbody>
+                                                    <tr class="order-total">
+                                                        <th>Total</th>
+                                                        <td data-title="Total">
+                                                            <strong>
+                                                                <span class="woocommerce-Price-amount amount">
+                                                                    <bdi><span class="woocommerce-Price-currencySymbol">Rs.</span>298</bdi>
+                                                                </span>
+                                                            </strong>
+                                                        </td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                            <div class="wc-proceed-to-checkout">
+                                                <a href="/checkout" class="checkout-button button alt wc-forward"> Proceed to checkout</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                       
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+
+

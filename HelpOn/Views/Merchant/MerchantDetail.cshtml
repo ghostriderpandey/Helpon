@@ -1,0 +1,1154 @@
+﻿@model HelpOn.Models.MerchantDetailModel
+@using HelpOn.Helper
+@{
+    ViewBag.Title = Model.merchant.Shopname;
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<style>
+    .gallery {
+        margin: 0px;
+    }
+
+        .gallery img {
+            width: 100px;
+            transition: 0.5s;
+            padding: 2px;
+            object-fit: contain;
+            border: 1px solid;
+            margin-left: 5px;
+            margin-top: 10px;
+        }
+
+            .gallery img:hover {
+                filter: drop-shadow(4px 4px 6px gray);
+                transform: scale(1.1);
+            }
+
+    .rate {
+        float: left;
+        height: 46px;
+        padding: 0 10px;
+    }
+
+        .rate:not(:checked) > input {
+            position: absolute;
+            top: -9999px;
+        }
+
+        .rate:not(:checked) > label {
+            float: right;
+            width: 1em;
+            overflow: hidden;
+            white-space: nowrap;
+            cursor: pointer;
+            font-size: 30px;
+            color: #ccc;
+        }
+
+            .rate:not(:checked) > label:before {
+                content: '★ ';
+            }
+
+        .rate > input:checked ~ label {
+            color: #ffc700;
+        }
+
+        .rate:not(:checked) > label:hover,
+        .rate:not(:checked) > label:hover ~ label {
+            color: #deb217;
+        }
+
+        .rate > input:checked + label:hover,
+        .rate > input:checked + label:hover ~ label,
+        .rate > input:checked ~ label:hover,
+        .rate > input:checked ~ label:hover ~ label,
+        .rate > label:hover ~ input:checked ~ label {
+            color: #c59b08;
+        }
+</style>
+<style>
+
+
+    .couponValid {
+        margin: 0;
+        text-align: center;
+        font-weight: 600;
+        font-size: 11px;
+        font-family: 'Libre Baskerville';
+    }
+
+    .Discount {
+        font-size: 3rem;
+        font-weight: bold;
+        position: absolute;
+        left: 0;
+        top: 6px;
+    }
+
+    .Percentage {
+        margin: 0;
+        padding: 0;
+        position: absolute;
+        font-weight: bold;
+        left: 80px;
+        top: 10px;
+        font-size: 2.5rem;
+    }
+
+    .off {
+        font-weight: bold;
+        font-size: 15px;
+        position: absolute;
+        left: 80px;
+        top: 50px;
+    }
+
+    .nameofDiscount {
+        font-size: 14px;
+        position: absolute;
+        right: 0;
+        top: 15px;
+        font-weight: bold;
+        width: 100px;
+        text-align: left;
+    }
+
+    .promocode {
+        margin: 0;
+        text-align: center;
+        font-weight: 600;
+        font-size: 11px;
+        font-family: 'Libre Baskerville';
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+    }
+
+    .code {
+        background-color: #663543;
+        display: inline;
+        padding: 0;
+        font-size: 9px;
+        letter-spacing: 1px;
+        font-weight: normal;
+        padding-left: 10px;
+        padding-right: 10px;
+    }
+
+    .blog-type-img-background {
+        height: 170px !important;
+        width: 370px !important;
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+    }
+
+    .alert {
+        height: 300px;
+        overflow-y: scroll;
+    }
+</style>
+<link href="~/assets/css/MerchantDetail.css" rel="stylesheet" />
+<main id="main" class="site-primary">
+    <div class="site-content">
+        <div class="homepage-content">
+            <div class="shop-content single-content">
+                <div class="p-2">
+                    <div class="row">
+                        <div class="col-md-3 pr-lg-1">
+                            <div class="card h-100" style="background: @Model.merchant.BgColor;color:#000;">
+                                <div class="card-body p-1 text-center">
+                                    <img src="@Model.merchant.ProfileImg" style="width:200px; height:180px; object-fit:cover;object-position:center;border-radius:10px;" />
+                                    <br />
+                                    <h4>@Model.merchant.Shopname</h4>
+
+                                    <h6><span class="klbtn-icon-location"></span> @Model.merchant.Address,@Model.merchant.Districtname,@Model.merchant.CityName-@Model.merchant.Pincode</h6>
+                                    <p>Contact for : @Model.merchant.Mobile</p>
+
+                                    <div class="social-share site-social style-1">
+
+                                        <ul class="social-container justify-content-around">
+                                            <li><a href="@Model.merchant.Facebook" target="_blank" class="facebook border-white border"><i class="klbth-icon-facebook"></i></a></li>
+                                            <li><a href="@Model.merchant.Twitter" target="_blank" class="twitter border-white border"><i class="klbth-icon-twitter"></i></a></li>
+                                            <li><a href="@Model.merchant.Instagram" target="_blank" class="instagram border-white border"><i class="klbth-icon-instagram"></i></a></li>
+                                            <li><a href="https://api.whatsapp.com/send?phone=+91 @Model.merchant.WhatsappNo" target="_blank" class="whatsapp border-white border"><i class="klbth-icon-whatsapp"></i></a></li>
+
+                                            <li><a href="tel:@Model.merchant.Mobile" target="_blank" class="border-white border" style="background: orange;"><i class="klbth-icon-mobile-phone" style="font-weight: bold;font-size: 23px;"></i></a></li>
+                                            <li><a href="@Model.merchant.WebSite" target="_blank" class="border-white border" style="background: orange;"><i class="klbth-icon-dribbble" style="font-weight: bold;font-size: 23px;"></i></a></li>
+                                            <li>
+                                                <a href="https://www.google.com/maps?q=@Model.merchant.Shopname.Replace(" ","+")+@Model.merchant.Address.Replace(" ","+")+@Model.merchant.CityName.Replace(" ","+")+@Model.merchant.StateName.Replace(" ","+")+@Model.merchant.Pincode+" target="_blank" class="border-white border" title="@Model.merchant.Shopname.Replace(" ","+"),@Model.merchant.Address.Replace(" ","+"),@Model.merchant.CityName.Replace(" ","+"),@Model.merchant.StateName.Replace(" ","+"),@Model.merchant.Pincode" style="background-color: darkred;">
+                                                    <i class="klbth-icon-location" style="font-weight: bold;font-size: 21px;"></i>
+                                                </a>
+                                            </li>
+
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-9 pl-lg-1 mt-1">
+                            <div class="carousel slide h-100" data-ride="carousel" id="carouselSliderControls">
+                                <div class="carousel-inner h-100">
+                                    @{ int j = 1;}
+                                    @if (Model.sliders.Count > 0)
+                                    {
+
+                                        foreach (var itemSlider in Model.sliders)
+                                        {
+                                            if (j == 1)
+                                            {
+                                                <div class="carousel-item active h-100">
+                                                    <img src="@Application.ImagePath/Slide/Compress/@itemSlider.Img" class="d-block w-100 h-100" alt="@itemSlider.Img" style="border-radius: .25rem; width: 1130px !important; height: 360px !important" ">
+                                                </div>
+                                                }
+                                                else
+                                                {
+                                                <div class="carousel-item h-100">
+                                                    <img src="@Application.ImagePath/Slide/Compress/@itemSlider.Img" class="d-block w-100 h-100" alt="@itemSlider.Img" style="border-radius: .25rem; width: 1130px !important; height: 360px !important">
+                                                </div>
+                                            }
+                                            j++;
+                                        }
+                                    }
+                                    else
+                                    {
+                                        <div class="carousel-item active h-100">
+                                            <img src="@Model.merchant.SlideIMG" class="d-block w-100 h-100" alt="@Model.merchant.SlideIMG" style="border-radius: .25rem; width:1130px !important;height:360px !important ">
+                                        </div>
+                                    }
+
+                                </div>
+                                <a class="carousel-control-prev" href="#carouselSliderControls" role="button" data-slide="prev">
+                                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                    <span class="sr-only">Previous</span>
+                                </a>
+                                <a class="carousel-control-next" href="#carouselSliderControls" role="button" data-slide="next">
+                                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                    <span class="sr-only">Next</span>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <div class="shop-content single-content">
+                <div class="p-1">
+
+                    <div class="single-wrapper">
+
+                        <div id="product-430"
+                             class="product type-product post-430 status-publish first instock product_cat-meats-seafood product_tag-chicken product_tag-natural product_tag-organic has-post-thumbnail sale shipping-taxable purchasable product-type-simple">
+
+                            <div class="product-content">
+                                <div class="row">
+                                    <div class="col col-12 col-lg-4 mt-1">
+                                        <div class="card alert bg-dark text-white m-0 w-100">
+                                            <div class="card-body p-1">
+                                                <div class=" w-100 text-left">
+                                                    <h5>About</h5>
+                                                    <hr class="p-0 m-0" />
+                                                    @Model.merchant.Aboutus
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col col-12 col-lg-4 mt-1">
+                                        <div class="card alert w-100 " style="background: #ffb100;color: #fff;">
+                                            <div class="card-body p-1">
+                                                <h5>Opening Hours</h5>
+                                                <hr class="p-0 m-0" />
+                                                <table class="table table-hover">
+                                                    @if (Model.serviceAvailablities != null)
+                                                    {
+                                                        foreach (var item in Model.serviceAvailablities)
+                                                        {
+                                                            <tr>
+                                                                <td class="p-1">@item.WeekName</td>
+                                                                <td class="p-1">@item.OpenTime</td>
+                                                                <td class="p-1">@item.CloseTime</td>
+
+                                                            </tr>
+                                                        }
+                                                    }
+
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col col-12 col-lg-4 mt-1">
+                                        <div class="card alert w-100 p-1" style="background: #00fff340; color: #000;">
+                                            <div class="card-body p-1">
+                                                <h5>Video Gallery</h5>
+                                                <hr />
+                                                <video controls="controls" class="w-100">
+                                                    <source src="@Model.merchant.VideoName" type="video/mp4">
+                                                </video>
+                                                @*<div class="woocommerce-product-gallery woocommerce-product-gallery--with-images woocommerce-product-gallery--columns-4 images" data-columns="4" style="opacity: 1; transition: opacity 0.25s ease-in-out 0s;">
+                                                        <div class="slider-wrapper">
+                                                            <div class="flex-viewport">
+
+
+
+                                                            </div>
+
+
+                                                        </div>
+                                                    </div>*@
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col col-12 col-lg-4 mt-1">
+                                        <div class="card alert w-100" style="background: #f5b159;">
+                                            <div class="card-body p-1">
+                                                <h5>Aminities/Services</h5>
+                                                <hr class="m-0" />
+                                                <ul class="p-2">
+                                                    @if (Model.aminities.Count > 0)
+                                                    {
+                                                        foreach (var itemAminities in Model.aminities)
+                                                        {
+                                                            <li>@itemAminities.Aminities</li>
+                                                        }
+                                                    }
+                                                    else
+                                                    {
+                                                        <li>@Model.merchant.Amenities</li>
+                                                    }
+
+
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col col-12 col-lg-4 mt-1">
+                                        <div class="card w-100 m-0">
+                                            <div class="card-body p-1">
+
+                                                <button type="button" class="btn btn-primary w-100 mt-2" data-toggle="modal" data-target="#AppointmentsModal">
+                                                    Appointments
+                                                </button>
+                                                <button type="button" class="btn btn-success mt-1 w-100" data-toggle="modal" data-target="#EnquiryNowModal">
+                                                    Enquiry Now
+                                                </button>
+                                            </div>
+                                        </div>
+                                        <div class="card w-100 m-0 mt-2">
+                                            <div class="card-body p-1">
+                                                <h6>Share Social Media</h6>
+                                                <hr />
+                                                <div class="social-share site-social style-1">
+
+                                                    <ul class="social-container justify-content-around">
+                                                        <li><a href="https://www.facebook.com/share.php?u=http://helpon.in/Detail/1@Model.merchant.MID" target="_blank" class="facebook" style="width: 3.125rem; height: 3.125rem;"><i class="klbth-icon-facebook" style="font-size: 1.9375rem;"></i></a></li>
+                                                        <li><a href="http://www.twitter.com/share?url=http://helpon.in/Detail/@Model.merchant.MID" target="_blank" class="twitter" style="width: 3.125rem; height: 3.125rem;"><i class="klbth-icon-twitter" style="font-size: 1.9375rem;"></i></a></li>
+                                                        <li><a href="https://www.instagram.com/sharer.php?u=http://helpon.in/Detail/@Model.merchant.MID" target="_blank" class="instagram" style="width: 3.125rem; height: 3.125rem;"><i class="klbth-icon-instagram" style="font-size: 1.9375rem;"></i></a></li>
+                                                        <li><a href="whatsapp://send?text=http://helpon.in/Detail/@Model.merchant.MID" target="_blank" class="whatsapp" style="width: 3.125rem; height: 3.125rem;"><i class="klbth-icon-whatsapp" style="font-size: 1.9375rem;"></i></a></li>
+
+
+                                                    </ul>
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col col-12 col-lg-4 mt-1">
+                                        <div class="card alert alert-dark w-100">
+                                            <div class="card-body p-1">
+                                                <h5>Image Gallery</h5>
+                                                <hr />
+                                                <div class="gallery">
+                                                    @{ int g = 1;}
+                                                    @foreach (var item in Model.merchantgalleries)
+                                                    {
+                                                        if (g <= 6)
+                                                        {
+                                                            <a href="@item.IMG" data-lightbox="mygallery">
+                                                                <img src="@item.IMG">
+                                                            </a>
+                                                            g++;
+                                                        }
+
+                                                    }
+
+                                                </div>
+
+                                            </div>
+                                            <a href="/Gallery/@Model.merchant.MID" class="text-right">More ...</a>
+                                        </div>
+                                    </div>
+                                    <div class="col-12 mt-2">
+                                        @if (Model.coupons.Count > 0)
+                                        {
+                                            <div class="column Coupan-owl-carousel owl-theme">
+                                                @foreach (var coupon in Model.coupons)
+                                                {
+                                                    <div class="couponBox CopiedCouponCode" data-id="@coupon.CouponsCode" style=@(coupon.BgColor != "" && coupon.Color=="" ? "background-color:" + coupon.BgColor + ";" : coupon.Color!="" && coupon.BgColor==""?"color:" + coupon.Color + ";":coupon.BgColor!="" && coupon.Color!=""?"background-color:" + coupon.BgColor + ";color:" + coupon.Color + ";":"")>
+
+                                                        <p class="couponValid">valid @coupon.ExpireDate</p>
+
+
+                                                        <label style="text-align: center; font-family: cursive; position: absolute; top: 15px;">
+                                                            @if (coupon.Name.ToUpper() == "Flat".ToUpper())
+                                                            {
+                                                                <span style="font-family: 'circularstd'; text-transform: capitalize; font-size: 30px;">Rs.</span>
+                                                            }
+
+                                                            <spna style="font-size: 3rem;" id="spnDiscount">@coupon.Discount</spna>
+                                                            @if (coupon.Name.ToUpper() != "Flat".ToUpper())
+                                                            {
+                                                                <span style="font-family: 'circularstd'; text-transform: capitalize; font-size: 30px;">%</span>
+                                                            }
+                                                            <span style="font-size: 18px;">@coupon.Name Discount</span>
+
+                                                        </label>
+                                                        <p class="promocode">Promo code: <span class="code" id="Clipboard_@coupon.CouponsCode">@coupon.CouponsCode</span></p>
+
+                                                    </div>
+                                                }
+                                            </div>
+                                        }
+                                        else
+                                        {
+                                            <h3 class="text-center">Coupon Comming Soon....</h3>
+                                        }
+                                        @* <style>
+                                                .card1 {
+                                                    width: 465px;
+                                                    height: 241px;
+                                                    border-radius: 5px;
+                                                    box-shadow: 0 4px 6px 0 rgb(0 0 0 / 20%);
+                                                    background-color: #fff;
+                                                    padding: 10px 10px;
+                                                }
+
+                                                #mydiv {
+                                                    background-repeat: no-repeat;
+                                                    background-size: auto;
+                                                    background-position: center;
+                                                    height: 250px;
+                                                    width: 465px;
+                                                    z-index: -1;
+                                                }
+
+                                                .main1, .copy-button {
+                                                    display: flex;
+                                                    justify-content: space-between;
+                                                    padding: 0 10px;
+                                                    align-items: center;
+                                                }
+
+                                                .content1 h2 {
+                                                    font-size: 18px;
+                                                    margin-left: -20px;
+                                                    color: #565656;
+                                                    text-transform: uppercase;
+                                                }
+
+                                                .content1 h1 {
+                                                    font-size: 35px;
+                                                    margin-left: -20px;
+                                                    color: #565656;
+                                                }
+
+                                                .content1 p {
+                                                    font-size: 16px;
+                                                    color: #696969;
+                                                    margin-left: -20px;
+                                                }
+
+                                                .content1 {
+                                                    width: 220px !important;
+                                                    float: left !important;
+                                                }
+
+                                                .coupon {
+                                                    width: 465px;
+                                                    height: 190px;
+                                                    background: radial-gradient(circle at right bottom, transparent 10px, #ffffff 0) top right / 50% 40px no-repeat, radial-gradient(circle at left bottom, transparent 10px, #ffffff 0) top left / 50% 40px no-repeat, radial-gradient(circle at right top, transparent 10px, #ffffff 0) bottom right / 50% 40px no-repeat, radial-gradient(circle at left top, transparent 10px, #ffffff 0) bottom left / 50% 40px no-repeat;
+                                                    filter: drop-shadow(3px 3px 3px #c5c5c5);
+                                                }
+
+                                                co-img {
+                                                    width: 140px !important;
+                                                    float: left;
+                                                }
+
+                                                .co-img img {
+                                                    width: 100px;
+                                                    height: 100px;
+                                                }
+
+                                                .co-img h1 {
+                                                    font-size: 15px;
+                                                }
+
+                                                .vertical1 {
+                                                    border-left: 5px dotted black;
+                                                    height: 100px;
+                                                    position: absolute;
+                                                    left: 40%;
+                                                }
+
+                                                .copy-button {
+                                                    margin: 12px 0 -5px 0;
+                                                    height: 45px;
+                                                    border-radius: 4px;
+                                                    padding: 0 5px;
+                                                    border: 1px solid #e1e1e1;
+                                                }
+
+                                                    .copy-button input {
+                                                        width: 100%;
+                                                        height: 100%;
+                                                        border: none;
+                                                        outline: none;
+                                                        font-size: 15px;
+                                                    }
+
+                                                    .copy-button button {
+                                                        padding: 5px 20px;
+                                                        background-color: #dc143c;
+                                                        color: #fff;
+                                                        border: 1px solid transparent;
+                                                    }
+                                            </style>
+                                            @if (Model.coupons.Count > 0)
+                                            {<div class="column Coupan-owl-carousel owl-theme">
+
+                                                        @foreach (var coupon in Model.coupons)
+                                                        {
+                                                            <div id="mydiv" data-id="@coupon.CouponsCode" style=@("background-image:url("+coupon.TemplatePath+");")>
+                                                                <div class="coupon">
+                                                                    <div class="card1">
+                                                                        <div class="main1">
+                                                                            <div class="co-img">
+                                                                                <img src="@coupon.TemplatePath" alt="">
+                                                                                <h1 style="color:@(coupon.Color)"> @coupon.ProductName</h1>
+                                                                            </div>
+                                                                            <div class="vertical1"></div>
+                                                                            <div class="content1">
+                                                                                <h2 style="color:@(coupon.Color)"> @coupon.FestivalName</h2>
+                                                                                <h1 style="color:@(coupon.Color)">
+                                                                                    @coupon.Discount
+                                                                                    @if (coupon.Name.ToUpper() == "Flat".ToUpper())
+                                                                                    {
+                                                                                        <span style="color:@(coupon.Color)">Rs.</span>
+                                                                                    }
+                                                                                    @if (coupon.Name.ToUpper() != "Flat".ToUpper())
+                                                                                    {
+                                                                                        <span style="color:@(coupon.Color)">%</span>
+                                                                                    }
+                                                                                    <span>@coupon.Name</span>
+                                                                                </h1>
+                                                                                <p style="color:@(coupon.Color)">Valid till @coupon.ExpireDate</p>
+                                                                                <p style="color:@(coupon.Color)">  @coupon.Remark</p>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="copy-button">
+                                                                            @if (coupon.Noofdays.ToString().Contains("-"))
+                                                                            {
+                                                                                <input id="Clipboard_@coupon.CouponsCode" type="text" readonly="" value="Expiry">
+                                                                            }
+                                                                            else if (coupon.Noofdays.ToString() == "0")
+                                                                            {
+                                                                                <input id="Clipboard_@coupon.CouponsCode" type="text" readonly="" value="Expiry">
+                                                                            }
+                                                                            else
+                                                                            {
+                                                                                <input id="Clipboard_@coupon.CouponsCode" type="text" readonly="" value="@coupon.CouponsCode">
+                                                                            }
+                                                                            @if (coupon.Noofdays.ToString().Contains("-"))
+                                                                            {
+
+                                                                            }
+                                                                            else if (coupon.Noofdays.ToString() == "0")
+                                                                            {
+
+                                                                            }
+                                                                            else
+                                                                            {
+                                                                                <button onclick="copyIt()" class="copybtn">COPY</button>
+                                                                            }
+
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        }
+
+                                                </div>
+                                            }*@
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="shop-content single-content">
+                <div class="p-1">
+                    <div class="card">
+                        <div class="card-header">
+                            @Html.Action("_MerchantProductByCategory", "Merchant")
+                        </div>
+                        <div class="loaderbox">
+
+                            <img src="~/assets/icon/loader.gif" />
+                        </div>
+                        <div class="card-body" id="partialView">
+                            @Html.Action("_MerchantProduct", "Merchant")
+
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            <div class="shop-content single-content ">
+                <div class="p-1">
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <div class="card">
+                                <div class="card-body">
+                                    <div class="row mb-3">
+                                        <div class="col-12">
+                                            <h4 id="review-section" class="h5 mb-4 text-black">Reviews</h4>
+
+                                            <div class="row mb-3 pt-3 pb-3 bg-light">
+                                                <div class="col-md-8">
+                                                    Start your review of @Model.merchant.Shopname
+                                                </div>
+                                                <div class="col-md-4 text-right">
+                                                    @if (SessionHelper.Islogin == false)
+                                                    {
+
+
+                                                        <button type="button" class="btn btn-primary rounded text-white" onclick="Loginpopup()"><i class="fa fa-star"></i> Write a Review</button>
+                                                    }
+                                                    else
+                                                    {
+                                                        <button type="button" class="btn btn-primary rounded text-white" data-toggle="modal" data-target="#ReviewModalCenter"><i class="fa fa-star"></i> Write a Review</button>
+                                                    }
+
+                                                </div>
+                                            </div>
+
+                                            <!-- Start review summary -->
+
+                                            <div class="row mt-4 mb-3">
+                                                <div class="col-12 text-right">
+                                                    <div class="form-inline justify-content-end" id="item-rating-sort-by-form">
+                                                        <div class="form-group">
+                                                            <label for="rating_sort_by">Sort by</label>
+                                                            <select class="custom-select ml-2" name="rating_sort_by" id="rating_sort_by">
+                                                                <option value="1" selected="">Newest First</option>
+                                                                <option value="2">Oldest First</option>
+                                                                <option value="3">Highest Rated</option>
+                                                                <option value="4">Lowest Rated</option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="row mb-3">
+                                                <div class="col-lg-3 bg-primary text-white">
+                                                    <div id="review_summary">
+                                                        <strong>4.0</strong>
+                                                        <small>Based on 4 Reviews</small>
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-9">
+                                                    <!-- Rating Progeress Bar -->
+                                                    <div class="row">
+                                                        <div class="col-lg-10 col-9 mt-2">
+                                                            <div class="progress">
+                                                                <div class="progress-bar" role="progressbar" style="width: 0%;" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-lg-2 col-3">
+                                                            <small><strong>1 Stars</strong></small>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col-lg-10 col-9 mt-2">
+                                                            <div class="progress">
+                                                                <div class="progress-bar" role="progressbar" style="width: 0%;" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-lg-2 col-3">
+                                                            <small><strong>2 Stars</strong></small>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col-lg-10 col-9 mt-2">
+                                                            <div class="progress">
+                                                                <div class="progress-bar" role="progressbar" style="width: 50%;" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-lg-2 col-3">
+                                                            <small><strong>3 Stars</strong></small>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col-lg-10 col-9 mt-2">
+                                                            <div class="progress">
+                                                                <div class="progress-bar" role="progressbar" style="width: 0%;" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-lg-2 col-3">
+                                                            <small><strong>4 Stars</strong></small>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col-lg-10 col-9 mt-2">
+                                                            <div class="progress">
+                                                                <div class="progress-bar" role="progressbar" style="width: 50%;" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-lg-2 col-3">
+                                                            <small><strong>5 Stars</strong></small>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <hr />
+                                            <!-- End review summary -->
+
+
+
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="card">
+                                <div class="card-body overflow-auto" style="height:415px;">
+                                    @Html.Action("_Review", "Merchant")
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <section class="shop-content single-content">
+                <div class="p-1">
+
+                    <div class="card bg-light">
+                        <div class="card-body">
+                            <div class="text-left border-primary mb-4 mt-4 position-relative">
+                                <h4 style="font-family: 'Libre Baskerville', serif; color: #ff3a6d;" class="font-weight-light">Similar</h4>
+                            </div>
+
+                            <div class=" owl-carousel owl-theme">
+
+                                @foreach (var ItemMerchant in Model.Reletedmerchant)
+                                {
+                                    <div class="d-block d-md-flex listing" id="chapter1">
+                                        <a href="/Detail/@ItemMerchant.MID"
+                                           class="img d-block"
+                                           style="        background-image: url( @ItemMerchant.ThumbnailIMG );
+        background-repeat: no-repeat;
+        background-size: 100% auto;
+        background-position: center top;
+        background-attachment: fixed;
+"></a>
+                                        <div class="lh-content">
+                                            <a href="/Detail/@ItemMerchant.MID">
+                                                <span class="category">
+                                                    <i class="fa fa-home"></i>
+                                                    @ItemMerchant.CategoryName
+                                                </span>
+                                            </a>
+                                            <a href="/Detail/@ItemMerchant.MID">
+                                                <span class="category">
+                                                    <i class="fa fa-hand-holding-usd"></i>
+                                                    @ItemMerchant.SubCategoryName
+                                                </span>
+                                            </a>
+
+                                            <h3 class="pt-2"><a href="/Detail/@ItemMerchant.MID" style="color: #ff3a6d;">@ItemMerchant.Shopname</a></h3>
+
+                                            <address class="m-0">
+                                                <a href="javascript:void(0)" style="color:#000;">@ItemMerchant.CityName</a>,
+                                                <a href="javascript:void(0)" style="color:#000;">@ItemMerchant.StateName</a>
+                                            </address>
+
+                                            <div class="row">
+                                                <div class="col-12">
+                                                    <div class="pl-0 rating_stars rating_stars_stress-free-mortgage jq-ry-container" data-id="rating_stars_stress-free-mortgage" data-rating="2.5" readonly="readonly">
+                                                        <div class="jq-ry-group-wrapper">
+
+                                                            <div class="jq-ry-rated-group jq-ry-group">
+                                                                <!--?xml version="1.0" encoding="utf-8"?-->
+                                                                <svg version="1.1" xmlns="http://www.w3.org/2000/svg" viewBox="0 12.705 512 486.59" x="0px" y="0px" xml:space="preserve" width="15px" height="15px" fill="#f39c12">
+                                                                <polygon points="256.814,12.705 317.205,198.566 512.631,198.566 354.529,313.435 414.918,499.295 256.814,384.427 98.713,499.295 159.102,313.435 1,198.566 196.426,198.566 "></polygon>
+                                    </svg>
+                                                                <!--?xml version="1.0" encoding="utf-8"?-->
+                                                                <svg version="1.1" xmlns="http://www.w3.org/2000/svg" viewBox="0 12.705 512 486.59" x="0px" y="0px" xml:space="preserve" width="15px" height="15px" fill="#f39c12" style="margin-left: 2px;">
+                                                                <polygon points="256.814,12.705 317.205,198.566 512.631,198.566 354.529,313.435 414.918,499.295 256.814,384.427 98.713,499.295 159.102,313.435 1,198.566 196.426,198.566 "></polygon>
+                                    </svg>
+                                                                <!--?xml version="1.0" encoding="utf-8"?-->
+                                                                <svg version="1.1" xmlns="http://www.w3.org/2000/svg" viewBox="0 12.705 512 486.59" x="0px" y="0px" xml:space="preserve" width="15px" height="15px" fill="#f39c12" style="margin-left: 2px;">
+                                                                <polygon points="256.814,12.705 317.205,198.566 512.631,198.566 354.529,313.435 414.918,499.295 256.814,384.427 98.713,499.295 159.102,313.435 1,198.566 196.426,198.566 "></polygon>
+                                    </svg>
+                                                                <!--?xml version="1.0" encoding="utf-8"?-->
+                                                                <svg version="1.1" xmlns="http://www.w3.org/2000/svg" viewBox="0 12.705 512 486.59" x="0px" y="0px" xml:space="preserve" width="15px" height="15px" fill="#f39c12" style="margin-left: 2px;">
+                                                                <polygon points="256.814,12.705 317.205,198.566 512.631,198.566 354.529,313.435 414.918,499.295 256.814,384.427 98.713,499.295 159.102,313.435 1,198.566 196.426,198.566 "></polygon>
+                                    </svg>
+                                                                <!--?xml version="1.0" encoding="utf-8"?-->
+                                                                <svg version="1.1" xmlns="http://www.w3.org/2000/svg" viewBox="0 12.705 512 486.59" x="0px" y="0px" xml:space="preserve" width="15px" height="15px" fill="#f39c12" style="margin-left: 2px;">
+                                                                <polygon points="256.814,12.705 317.205,198.566 512.631,198.566 354.529,313.435 414.918,499.295 256.814,384.427 98.713,499.295 159.102,313.435 1,198.566 196.426,198.566 "></polygon>
+                                    </svg>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    @*<address class="mt-1">
+                                                            (2 reviews)
+                                                        </address>*@
+                                                </div>
+                                            </div>
+
+                                            <hr class="item-box-hr" />
+
+                                            <div class="row align-items-center">
+                                                <div class="col-5 col-md-7 pr-0">
+                                                    <div class="row align-items-center item-box-user-div">
+                                                        <div class="col-3 item-box-user-img-div">
+                                                            <img src="@ItemMerchant.ProfileImg" alt="@ItemMerchant.Name" class="img-fluid rounded-circle" />
+                                                        </div>
+                                                        <div class="col-9 line-height-1-2 item-box-user-name-div">
+                                                            <div class="row pb-1">
+                                                                <div class="col-12">
+                                                                    <span class="font-size-13">@ItemMerchant.Name</span>
+                                                                </div>
+                                                            </div>
+                                                            <div class="row line-height-1-0">
+                                                                <div class="col-12">
+                                                                    <span class="review">2 years ago</span>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-7 col-md-5 pl-0 text-right">
+                                                    <span class="item-box-hour-span-opened">Now open</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+
+                                }
+
+                            </div>
+
+                        </div>
+                    </div>
+
+                </div>
+            </section>
+
+        </div>
+    </div>
+</main>
+
+
+<!-- Modal -->
+<div class="modal fade" id="AppointmentsModal" tabindex="-1" role="dialog" aria-labelledby="AppointmentsModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="AppointmentsModalLabel">Appointments</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                @Html.Action("_Appointments", "Merchant")
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="EnquiryNowModal" tabindex="-1" role="dialog" aria-labelledby="EnquiryNowModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="EnquiryNowModalLabel">Enquiry Now</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                @Html.Action("_EnquiryNow", "Merchant")
+            </div>
+
+        </div>
+    </div>
+</div>
+<!-- Modal -->
+<!-- Modal -->
+<div class="modal fade" id="ReviewModalCenter" tabindex="-1" role="dialog" aria-labelledby="ReviewModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="ReviewModalCenterLongTitle">Review</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body text-center">
+                <div class="rate">
+                    <input type="radio" id="star5" name="rate" value="5" />
+                    <label for="star5" title="text" class="ratingStar" data-star="5">5 stars</label>
+                    <input type="radio" id="star4" name="rate" value="4" />
+                    <label for="star4" title="text" class="ratingStar" data-star="4">4 stars</label>
+                    <input type="radio" id="star3" name="rate" value="3" />
+                    <label for="star3" title="text" class="ratingStar" data-star="3">3 stars</label>
+                    <input type="radio" id="star2" name="rate" value="2" />
+                    <label for="star2" title="text" class="ratingStar" data-star="2">2 stars</label>
+                    <input type="radio" id="star1" name="rate" value="1" />
+                    <label for="star1" title="text" class="ratingStar" data-star="1">1 star</label>
+                </div>
+                <form action="/Submit_Review" method="post" id="formReviewSubmit">
+                    <input type="hidden" name="MID" value="@Model.merchant.MID" />
+                    <input type="hidden" name="Rating" id="hndRating" />
+                    <textarea placeholder="Enter Comment" name="Comment"></textarea>
+                    <button type="submit" class="btn btn-primary mt-2">Submit</button>
+                </form>
+            </div>
+
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+    function copyToClipboard(element) {
+        var $temp = $("<input>");
+        $("body").append($temp);
+        $temp.val($(element).text()).select();
+        document.execCommand("copy");
+        $temp.remove();
+    }
+    $(".CopiedCouponCode").each(function () {
+        $(this).click(function () {
+            var id = $(this).attr('data-id');
+
+            var e = "#Clipboard_" + id;
+            copyToClipboard(e);
+            swal('Alert !','Copied Coupon Code : '+id+'','success');
+        });
+    });
+    $(document).ready(function () {
+        $('.owl-carousel').owlCarousel({
+            loop: true,
+            lazyLoad: true,
+            margin: 10,
+            responsiveClass: true,
+            nav: false,
+            autoplay: true,
+            autoplayHoverPause: true,
+            responsive: {
+                0: {
+                    items: 1,
+                    nav: true
+                },
+                600: {
+                    items: 3,
+                    nav: false
+                },
+                1000: {
+                    items: 2,
+                    nav: true,
+                    loop: false
+                }
+            }
+        });
+        $('.Coupan-owl-carousel').owlCarousel({
+            loop: true,
+            lazyLoad: true,
+            margin: 10,
+            responsiveClass: true,
+            nav: false,
+            autoplay: true,
+            autoplayHoverPause: true,
+            responsive: {
+                0: {
+                    items: 1,
+                    nav: true
+                },
+                600: {
+                    items: 3,
+                    nav: false
+                },
+                1000: {
+                    items: 5,
+                    nav: true,
+                    loop: false
+                }
+            }
+        });
+        $(".owl-nav").addClass("d-none");
+        $(".owl-dots").addClass("d-none");
+    });
+    function GetpartialView(e, c,n) {
+
+        var d = {
+            id: @ViewBag.MID,
+            cid: c,
+            name:n
+        };
+        console.log(d);
+        $.ajax({
+            type: "POST",
+            url: e,
+            data: JSON.stringify(d),
+            dataType: "html",
+            contentType: 'application/json; charset=utf-8',
+            beforeSend: function () {
+                $(".loaderbox").css("display", "flex");
+            },
+            success: function (data) {
+                $('#partialView').html('');
+                $('#partialView').html(data);
+            },
+            complete: function () {
+                $(".loaderbox").css("display", "none");
+            },
+            error: function () {
+
+            }
+        });
+    }
+
+    function GoToCart() {
+        GetpartialView('/Cart/_Cart',0);
+    }
+    function GoBack() {
+        GetpartialView('/Merchant/_MerchantProduct',0);
+    }
+    var Categoryid = 0;
+    $(".nav-link").each(function () {
+        $(this).click(function () {
+            Categoryid= $(this).attr('data-id');
+            $(".nav-link").removeClass("active");
+            $(this).addClass("active");
+            GetpartialView('/Merchant/_MerchantProduct', Categoryid);
+        });
+    });
+    $("#btnSearchProduct").click(function () {
+        var name = $("#txtSearchproduct").val();
+        GetpartialView('/Merchant/_MerchantProduct', 0,name);
+
+    });
+    var Islogin = '@HelpOn.Helper.SessionHelper.Islogin';
+    function AddToCart(p, q) {
+
+        if (Islogin == 'False') {
+            $('#LoginModalCenter').modal('show');
+            return;
+        }
+        event.preventDefault();
+        var Cart = {
+            PID: p,
+            Qty: q
+        };
+        $.ajax({
+            type: "POST",
+            url: "/Cart/AddToCart",
+            data: JSON.stringify(Cart),
+            dataType: "json",
+            contentType: 'application/json; charset=utf-8',
+            beforeSend: function () {
+                $(".loaderbox").css("display", "flex");
+            },
+            success: function (data) {
+                if (data.Status > 0) {
+                    GetpartialView('/Merchant/_MerchantProduct',0);
+                }
+                else {
+                    swal('Alert', data.Message, 'error');
+                }
+
+            },
+            complete: function () {
+                $(".loaderbox").css("display", "none");
+            },
+            error: function () {
+
+            }
+        });
+    }
+    function DeleteCart(p) {
+
+        if (Islogin == 'False') {
+            $('#LoginModalCenter').modal('show');
+            return;
+        }
+        event.preventDefault();
+        var Cart = {
+            PID: p
+        };
+        $.ajax({
+            type: "POST",
+            url: "/Cart/DeleteCart",
+            data: JSON.stringify(Cart),
+            dataType: "json",
+            contentType: 'application/json; charset=utf-8',
+            beforeSend: function () {
+                $(".loaderbox").css("display", "flex");
+            },
+            success: function (data) {
+                if (data.Status > 0) {
+                    GetpartialView('/Cart/_Cart', 0);
+                }
+                else {
+                    swal('Alert', data.Message, 'error');
+                }
+
+            },
+            complete: function () {
+                $(".loaderbox").css("display", "none");
+            },
+            error: function () {
+
+            }
+        });
+    }
+    $(".ratingStar").each(function () {
+        $(this).click(function () {
+            var star = $(this).attr('data-star');
+
+            $("#hndRating").val(star);
+        });
+    });
+    $("#formReviewSubmit").submit(function (e) {
+        e.preventDefault(e);
+        var url = $('#formReviewSubmit')[0].action;
+        $.ajax({
+            type: "POST",
+            url: url,
+            data: $('#formReviewSubmit').serialize(),
+            success: function (data) {
+                if (data.Status > 0) {
+
+                    swal('Alert', data.Message, 'success').then((value) => { location.reload(); });
+                }
+                else {
+                    swal('Alert', data.Message, 'error');
+                }
+            },
+            error: function (xhr, status, error) {
+
+            }
+        })
+    });
+</script>
