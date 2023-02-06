@@ -163,7 +163,9 @@ namespace HelpOn.Repository
             merchant.serviceAvailablities = Connection.Query<ServiceAvailablityModel>("Exec ProcMaster_Merchant 'GetMerchantServiceAvailablity','" + id + "'").ToList();
             merchant.aminities = Connection.Query<AminitiesModel>("select * from tblManage_Aminities where MID='" + id + "'").ToList();
             merchant.merchantgalleries = Connection.Query<Merchantgallery>("ProcGet_List 'GetGallery','" + id + "'").ToList();
-            merchant.coupons = Connection.Query<CouponModel>("ProcMaster_MerchantCoupon 'GetAll',@MId='" + id + "'").ToList();
+            merchant.coupons = Connection.Query<CouponModel>("ProcMaster_Coupon 'GetAll',@Id='" + id + "'").ToList();
+            if (merchant.coupons.Count == 0)
+                merchant.coupons = Connection.Query<CouponModel>("ProcMaster_Coupon 'GetAll',@Id='0'").ToList();
             if (merchant.aminities.Count <= 0)
             {
                 merchant.aminities = new List<AminitiesModel>();

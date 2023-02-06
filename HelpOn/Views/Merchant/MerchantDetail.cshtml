@@ -10,7 +10,8 @@
     }
 
         .gallery img {
-            width: 100px;
+		height:100px !important;
+            width: 100px  !important;;
             transition: 0.5s;
             padding: 2px;
             object-fit: contain;
@@ -67,7 +68,18 @@
         }
 </style>
 <style>
-
+    .couponBox {
+        width: 260px;
+        height: 141px;
+        background-color: #e24c79;
+        color: #fff;
+        font-family: 'Libre Baskerville';
+        text-transform: uppercase;
+        padding: 10px;
+        position: relative;
+        border-radius: 15px;
+        border: 2px dashed;
+    }
 
     .couponValid {
         margin: 0;
@@ -199,13 +211,13 @@
                                             if (j == 1)
                                             {
                                                 <div class="carousel-item active h-100">
-                                                    <img src="@Application.ImagePath/Slide/Compress/@itemSlider.Img" class="d-block w-100 h-100" alt="@itemSlider.Img" style="border-radius: .25rem; width: 1130px !important; height: 360px !important" ">
+                                                    <img src="@Application.ImagePath/Slide/Compress/@itemSlider.Img" class="d-block w-100 h-100" alt="@itemSlider.Img" style="border-radius: .25rem; width: 1130px !important; height: 400px !important" ">
                                                 </div>
                                                 }
                                                 else
                                                 {
                                                 <div class="carousel-item h-100">
-                                                    <img src="@Application.ImagePath/Slide/Compress/@itemSlider.Img" class="d-block w-100 h-100" alt="@itemSlider.Img" style="border-radius: .25rem; width: 1130px !important; height: 360px !important">
+                                                    <img src="@Application.ImagePath/Slide/Compress/@itemSlider.Img" class="d-block w-100 h-100" alt="@itemSlider.Img" style="border-radius: .25rem; width: 1130px !important; height: 400px !important">
                                                 </div>
                                             }
                                             j++;
@@ -214,7 +226,7 @@
                                     else
                                     {
                                         <div class="carousel-item active h-100">
-                                            <img src="@Model.merchant.SlideIMG" class="d-block w-100 h-100" alt="@Model.merchant.SlideIMG" style="border-radius: .25rem; width:1130px !important;height:360px !important ">
+                                            <img src="@Model.merchant.SlideIMG" class="d-block w-100 h-100" alt="@Model.merchant.SlideIMG" style="border-radius: .25rem; width:1130px !important;height:400px !important ">
                                         </div>
                                     }
 
@@ -383,6 +395,7 @@
                                     <div class="col-12 mt-2">
                                         @if (Model.coupons.Count > 0)
                                         {
+
                                             <div class="column Coupan-owl-carousel owl-theme">
                                                 @foreach (var coupon in Model.coupons)
                                                 {
@@ -405,11 +418,28 @@
                                                             <span style="font-size: 18px;">@coupon.Name Discount</span>
 
                                                         </label>
-                                                        <p class="promocode">Promo code: <span class="code" id="Clipboard_@coupon.CouponsCode">@coupon.CouponsCode</span></p>
+                                                        <p class="promocode">
+                                                            Promo code: <span class="code" id="Clipboard_@coupon.CouponsCode">
+                                                                @if (coupon.Noofdays.ToString().Contains("-"))
+                                                                {
+                                                                    <span class="code" id="Clipboard_@coupon.CouponsCode">Expiry</span>
+                                                                }
+                                                                else if (coupon.Noofdays.ToString() == "0")
+                                                                {
+                                                                    <span class="code" id="Clipboard_@coupon.CouponsCode">Expiry</span>
+                                                                }
+                                                                else
+                                                                {<span class="code" id="Clipboard_@coupon.CouponsCode">@coupon.CouponsCode</span>
+
+                                                            }
+
+                                                            </span>
+                                                        </p>
 
                                                     </div>
                                                 }
                                             </div>
+
                                         }
                                         else
                                         {

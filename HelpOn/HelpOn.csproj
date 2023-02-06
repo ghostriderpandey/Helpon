@@ -170,6 +170,7 @@
     <Content Include="assets\icon\Coupon.png" />
     <Content Include="assets\icon\empty-cart.png" />
     <Content Include="assets\icon\loader.gif" />
+    <Content Include="assets\icon\mobile.png" />
     <Content Include="assets\icon\mobile01.jpg" />
     <Content Include="assets\icon\mobile01.png" />
     <Content Include="assets\icon\resort.png" />

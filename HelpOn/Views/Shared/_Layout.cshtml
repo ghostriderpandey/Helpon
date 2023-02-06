@@ -19,6 +19,7 @@
     <script src="~/assets/js/jquery-3.6.1.js"></script>
     <script src="~/assets/js/sweetalert.min.js"></script>
     <script src="~/assets/js/autofill.js"></script>
+    <a href="~/Views/Shared/_Layout.cshtml"> </a>
     <script src="~/Script/AjaxCall.js"></script>
     <script>
         $(document).ready(function () {
@@ -236,9 +237,10 @@
         @RenderBody()
     </div>
     <footer class="site-footer mt-2">
-        <div class="footer-iconboxes">
+	   <div class="footer-iconboxes">
             <div class="container">
-                <div class="row">
+			<div class="delivery_Platform">
+			    <div class="row">
                     <div class="col col-12 col-md-6 col-lg-3">
                         <div class="iconbox">
                             <div class="iconbox-icon"><i class="klbth-icon-store"></i></div>
@@ -272,7 +274,8 @@
                                 <span style="font-family: 'Libre Baskerville', serif;">Best price on the market</span>
                             </div>
                         </div>
-                    </div>
+					</div>
+					</div>
                 </div>
             </div>
             <div class="footer-widgets border-enable">

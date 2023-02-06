@@ -1,4 +1,4 @@
-﻿
+
 body {
     --wp--preset--color--black: #000000;
     --wp--preset--color--cyan-bluish-gray: #abb8c3;
@@ -595,6 +595,7 @@ body.elementor-page-50 .elementor-section.elementor-section-boxed > .elementor-c
         --e-column-margin-left: 0px;
         padding: 0px 0px 0px 0px;
     }
+    
 }
 @media(max-width:64rem) {
     header .sticky-header
@@ -768,11 +769,11 @@ body.elementor-page-50 .elementor-section.elementor-section-boxed > .elementor-c
 }
 
     .site-footer .footer-iconboxes .iconbox {
-        color: #000000;
+        color: #fff;
     }
 
         .site-footer .footer-iconboxes .iconbox:hover {
-            color: #000000;
+            color: #fff;
         }
 
 .site-footer .footer-widgets {
@@ -901,7 +902,7 @@ body.elementor-page-50 .elementor-section.elementor-section-boxed > .elementor-c
     max-width: 600px
 }
 .site-header .header-main .site-brand img.desktop-logo {
-    width: 164px;
+    width: 140px;
 }
 
 .site-header .header-main .site-brand img.mobile-logo {
