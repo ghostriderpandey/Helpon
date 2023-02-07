@@ -9531,7 +9531,6 @@ input[type=button].btn-block, input[type=reset].btn-block, input[type=submit].bt
     display: -ms-flexbox;
     display: flex;
     -ms-flex-wrap: wrap;
-    flex-wrap: wrap;
     -ms-flex-align: stretch;
     align-items: stretch;
     width: 100%

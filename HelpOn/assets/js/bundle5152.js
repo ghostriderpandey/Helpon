@@ -281,18 +281,7 @@
 			var verti = false;
 		}
 
-		$('.product-thumbnails').slick({
-		  dots: false,
-		  arrows: true,
-		  prevArrow: '<div class="prev"><i class="far fa-angle-left"></i></div>',
-		  nextArrow: '<div class="next"><i class="far fa-angle-right"></i></div>',
-		  autoplay: false,
-		  Speed: 2000,
-		  slidesToShow: 6,
-		  slidesToScroll: 1,
-		  focusOnSelect: true,
-		  vertical: verti,
-		});
+	 
 
 		$(".flex-viewport, .flex-control-nav" ).wrapAll( "<div class='slider-wrapper'></div>" );
 		

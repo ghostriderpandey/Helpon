@@ -244,7 +244,7 @@
                                                                 <div class="content-wrapper p-0">
 
                                                                     <h3 class="product-title text-center p-2 m-0" style="background: #000;border-top-left-radius: 15px;border-top-right-radius: 15px;">
-                                                                        <a href="Javascript:void(0)" title="India Top" >@popularitem.Name</a>
+                                                                        <a href="Javascript:void(0)" title="India Top">@popularitem.Name</a>
                                                                     </h3>
                                                                 </div>
                                                                 <div class="thumbnail-wrapper text-center p-0">
@@ -320,7 +320,7 @@
                                                     @foreach (var Categoryitem in Model.categories)
                                                     {
 
-                                                        if (j <Categoryitem.ID-2 && j <= 24)
+                                                        if (j < Categoryitem.ID - 2 && j <= 24)
                                                         {
                                                             <div class="product product-type-simple">
 
@@ -364,7 +364,7 @@
                                                     @foreach (var Categoryitem in Model.categories)
                                                     {
 
-                                                        if (j < (Categoryitem.ID-4) && j <= 36)
+                                                        if (j < (Categoryitem.ID - 4) && j <= 36)
                                                         {
                                                             <div class="product product-type-simple">
 
@@ -391,7 +391,7 @@
                                                 </div>
                                                 <div class="container p-1">
                                                     <div class="row">
-                                                        <div class="col-md-8 Home_BannerSize" >
+                                                        <div class="col-md-8 Home_BannerSize">
                                                             <img src="@Application.ImagePath/Slide/Compress/@Model.Banner3" style="height:100%;border-radius:10px;" />
                                                         </div>
                                                         <div class="col-md-4 pl-md-0">
@@ -449,7 +449,7 @@
                                         <p>Tell us more about your requirements so that we can connect you to the right service provider.</p>
                                         <ul>
                                             <li>
-                                               
+
                                                 <img src="~/assets/icon/7.png" />
                                                 <div>
                                                     <h5>Tell us more about your requirements</h5>
@@ -484,7 +484,7 @@
 
                             <div class="col-md-6 text-center">
                                 <img src="~/assets/images/icon/mobile.png" />
-                               
+
                             </div>
 
                             <div class="col-md-6 web-app-con">
@@ -505,7 +505,7 @@
 
                                 <form class="ng-pristine ng-valid">
 
-                                  
+
                                     <div class="row">
                                         <div class="col-7">
                                             <input type="number" placeholder="+91 Enter mobile number">
@@ -522,18 +522,18 @@
                                     </div>
                                 </form>
 
-                             
+
                             </div>
 
                         </div>
 
                     </div>
                 </footer>
-             <footer class="site-footer mt-2">
+                <footer class="site-footer mt-2">
                     <div class="footer-iconboxes" style="background: #47aff373;">
                         <div class="container">
                             <h4 class="text-center"> Popular Localities</h4>
-                            <div class="owl-carousel owl-theme">
+                            <div class="owl-carousel">
                                 @foreach (var popularcity in Model.popularCities)
                                 {
                                     <div class="products">
@@ -558,6 +558,29 @@
 
 
                             </div>
+                            <ul id="scroller">
+                                @foreach (var popularcity in Model.popularCities)
+                                {
+                                    <li>
+                                        <div class="products">
+                                            <div class="product product-type-simple" style="border-radius: 10px;border-color: orange;">
+                                                <div class="thumbnail-wrapper text-center p-0">
+                                                    <a href="/Segment/@popularcity.Name.Trim().Replace(" ","-").Replace("&","_")">
+                                                        <img class="img-fluid item-img rounded" alt="" src="@Application.ImagePath/Category/@popularcity.IMG">
+
+                                                    </a>
+                                                </div>
+                                                <div class="content-wrapper p-0">
+                                                    <h3 class="product-title text-center p-2" style="background: #fff; margin: 0;">
+                                                        <a href="/Segment/@popularcity.Name.Trim().Replace(" ","-").Replace("&","_")" style="color: #000;">@popularcity.Name</a>
+                                                    </h3>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </li>
+
+                                }
+                            </ul>
                         </div>
                     </div>
                 </footer>
@@ -565,8 +588,70 @@
         </div>
     </div>
 </main>
+<script src="~/assets/script1.js"></script>
+<script src="~/assets/script2.js"></script>
+<style>
+    /* Container DIV - automatically generated */
+    .simply-scroll-container {
+        position: relative;
+    }
+
+    /* Clip DIV - automatically generated */
+    .simply-scroll-clip {
+        position: relative;
+        overflow: hidden;
+    }
+
+    /* UL/OL/DIV - the element that simplyScroll is inited on
+    Class name automatically added to element */
+    .simply-scroll-list {
+        overflow: hidden;
+        margin: 0;
+        padding: 0;
+        list-style: none;
+    }
+
+        .simply-scroll-list li {
+            padding: 0;
+            margin: 0;
+            list-style: none;
+        }
+
+            .simply-scroll-list li img {
+                border: none;
+                display: block;
+                height: auto;
+                max-width: 100%;
+            }
+
+    /* Custom class modifications - adds to / overrides above
+
+    .simply-scroll is default base class */
+
+    /* Container DIV */
+    .simply-scroll {
+        width: 1170px;
+        height: 200px;
+        margin-bottom: 1em;
+    }
+
+        /* Clip DIV */
+        .simply-scroll .simply-scroll-clip {
+            width: 1170px;
+            height: 200px;
+        }
+
+        /* Explicitly set height/width of each list item */
+        .simply-scroll .simply-scroll-list li {
+            float: left; /* Horizontal scroll only */
+            width: 160px;
+            height: 200px;
+            padding: 10px !important;
+        }
+</style>
 <script>
     $(document).ready(function () {
+        $("#scroller").simplyScroll();
         $('.owl-carousel').owlCarousel({
             loop: true,
             lazyLoad: true,
@@ -604,8 +689,8 @@
                 },
                 success: function (data) {
                     if (data.Status > 0) {
-                        swal('Alert', data.Message, 'success').then((value) => { location.reload();});
-                        
+                        swal('Alert', data.Message, 'success').then((value) => { location.reload(); });
+
                     }
                     else {
                         swal('Alert', data.Message, 'error');
@@ -620,7 +705,7 @@
             });
         });
     });
-  
+
 </script>
 <script>
 

@@ -19,61 +19,6 @@
     <script src="~/assets/js/jquery-3.6.1.js"></script>
     <script src="~/assets/js/sweetalert.min.js"></script>
     <script src="~/assets/js/autofill.js"></script>
-    <a href="~/Views/Shared/_Layout.cshtml"> </a>
-    <script src="~/Script/AjaxCall.js"></script>
-    <script>
-        $(document).ready(function () {
-            PostForm('/Home/GetallCategoryFirst', '{"CId":18}', 'json', 50000, respc1);
-            PostForm('/Home/GetallCategoryFirst', '{"CId":19}', 'json', 50000, respc2);
-            PostForm('/Home/GetallCategoryFirst', '{"CId":5}', 'json', 50000, respc3);
-            PostForm('/Home/GetallCategoryFirst', '{"CId":7}', 'json', 50000, respc4);
-        });
-        function respc1(response) {
-            if ((response && jQuery.isArray(response)) ? (response.length == 0 ? false : (jQuery.isPlainObject(response[0]) ? !jQuery.isEmptyObject(response[0]) : response[0])) : response) {
-
-                $("#hcat1").html(response.Name);
-                $("#Ulsubcat1").empty();
-                $.each(response.subcateName, function (i) {
-                    var optionhtml = '<li value="' +
-                        response.subcateName[i].SubCatId + '" class="menu-item menu-item-type-taxonomy"><a href="/Segment/' + response.subcateName[i].SubCatName + '" style=\"font-family:Libre Baskerville\" >' + response.subcateName[i].SubCatName + '</a></li>';
-                    $("#Ulsubcat1").append(optionhtml);
-                });
-            }
-        }
-        function respc2(response) {
-            if (response) {
-                $("#hcat2").html(response.Name);
-                $("#Ulsubcat2").empty();
-                $.each(response.subcateName, function (i) {
-                    var optionhtml = '<li value="' +
-                        response.subcateName[i].SubCatId + '" class="menu-item menu-item-type-taxonomy"><a href="/Segment/' + response.subcateName[i].SubCatName + '" style=\"font-family:Libre Baskerville\" >' + response.subcateName[i].SubCatName + '</a></li>';
-                    $("#Ulsubcat2").append(optionhtml);
-                });
-            }
-        }
-        function respc3(response) {
-            if (response) {
-                $("#hcat3").html(response.Name);
-                $("#Ulsubcat3").empty();
-                $.each(response.subcateName, function (i) {
-                    var optionhtml = '<li value="' +
-                        response.subcateName[i].SubCatId + '" class="menu-item menu-item-type-taxonomy"><a href="/Segment/' + response.subcateName[i].SubCatName + '" style=\"font-family:Libre Baskerville\">' + response.subcateName[i].SubCatName + '</a></li>';
-                    $("#Ulsubcat3").append(optionhtml);
-                });
-            }
-        }
-        function respc4(response) {
-            if (response) {
-                $("#hcat4").html(response.Name);
-                $("#Ulsubcat4").empty();
-                $.each(response.subcateName, function (i) {
-                    var optionhtml = '<li value="' +
-                        response.subcateName[i].SubCatId + '" class="menu-item menu-item-type-taxonomy"><a href="/Segment/' + response.subcateName[i].SubCatName + '" style=\"font-family:Libre Baskerville\">' + response.subcateName[i].SubCatName + '</a></li>';
-                    $("#Ulsubcat4").append(optionhtml);
-                });
-            }
-        }
-    </script>
 </head>
 <body class="home page-template-default page page-id-50 theme-bacola woocommerce-no-js tinvwl-theme-style  elementor-default elementor-kit-11 elementor-page elementor-page-50">
     <div class="site-canvas">
@@ -237,10 +182,9 @@
         @RenderBody()
     </div>
     <footer class="site-footer mt-2">
-	   <div class="footer-iconboxes">
+        <div class="footer-iconboxes">
             <div class="container">
-			<div class="delivery_Platform">
-			    <div class="row">
+                <div class="row">
                     <div class="col col-12 col-md-6 col-lg-3">
                         <div class="iconbox">
                             <div class="iconbox-icon"><i class="klbth-icon-store"></i></div>
@@ -274,8 +218,7 @@
                                 <span style="font-family: 'Libre Baskerville', serif;">Best price on the market</span>
                             </div>
                         </div>
-					</div>
-					</div>
+                    </div>
                 </div>
             </div>
             <div class="footer-widgets border-enable">
@@ -283,36 +226,53 @@
                     <div class="row">
                         <div class="col col-12 col-lg-3 col-five">
                             <div class="klbfooterwidget widget widget_nav_menu">
-                                <h4 class="widget-title text-capitalize" style="font-family: 'Libre Baskerville', serif;" id="hcat1"></h4>
+                                <h4 class="widget-title text-capitalize" style="font-family: 'Libre Baskerville', serif;">Beauty &amp; Health</h4>
                                 <div class="menu-fruits-and-vegetables-container">
-                                    <ul id="Ulsubcat1" class="menu">
+                                    <ul id="menu-fruits-and-vegetables" class="menu">
+                                        <li id="menu-item-1798" class="menu-item menu-item-type-taxonomy menu-item-object-product_cat menu-item-1798"><a href="#" style="font-family: 'Libre Baskerville', serif;">Salons</a></li>
+                                        <li id="menu-item-1799" class="menu-item menu-item-type-taxonomy menu-item-object-product_cat menu-item-1799"><a href="#" style="font-family: 'Libre Baskerville', serif;">Cosmetics</a></li>
+                                        <li id="menu-item-1797" class="menu-item menu-item-type-taxonomy menu-item-object-product_cat menu-item-1797"><a href="#" style="font-family: 'Libre Baskerville', serif;">Opticals</a></li>
+                                        <li id="menu-item-1795" class="menu-item menu-item-type-taxonomy menu-item-object-product_cat menu-item-1795"><a href="#" style="font-family: 'Libre Baskerville', serif;">Medical Shop</a></li>
+                                        <li id="menu-item-1796" class="menu-item menu-item-type-taxonomy menu-item-object-product_cat menu-item-1796"><a href="#" style="font-family: 'Libre Baskerville', serif;">Hospitals</a></li>
                                     </ul>
                                 </div>
                             </div>
                         </div>
                         <div class="col col-12 col-lg-3 col-five">
                             <div class="klbfooterwidget widget widget_nav_menu">
-                                <h4 class="widget-title text-capitalize" style="font-family: 'Libre Baskerville', serif;" id="hcat2"></h4>
+                                <h4 class="widget-title text-capitalize" style="font-family: 'Libre Baskerville', serif;">Food</h4>
                                 <div class="menu-breakfast-dairy-container">
-                                    <ul id="Ulsubcat2" class="menu">
+                                    <ul id="menu-breakfast-dairy" class="menu">
+                                        <li id="menu-item-1807" class="menu-item menu-item-type-taxonomy menu-item-object-product_cat menu-item-1807"><a href="#" style="font-family: 'Libre Baskerville', serif;">Cafe</a></li>
+                                        <li id="menu-item-1802" class="menu-item menu-item-type-taxonomy menu-item-object-product_cat menu-item-1802"><a href="#" style="font-family: 'Libre Baskerville', serif;">Retro Bars</a></li>
+                                        <li id="menu-item-1803" class="menu-item menu-item-type-taxonomy menu-item-object-product_cat menu-item-1803"><a href="#" style="font-family: 'Libre Baskerville', serif;">Fast Food</a></li>
+                                        <li id="menu-item-1804" class="menu-item menu-item-type-taxonomy menu-item-object-product_cat menu-item-1804"><a href="#" style="font-family: 'Libre Baskerville', serif;">Bar</a></li>
+                                        <li id="menu-item-1805" class="menu-item menu-item-type-taxonomy menu-item-object-product_cat menu-item-1805"><a href="#" style="font-family: 'Libre Baskerville', serif;">Bakery</a></li>
+                                        <li id="menu-item-1806" class="menu-item menu-item-type-taxonomy menu-item-object-product_cat menu-item-1806"><a href="#" style="font-family: 'Libre Baskerville', serif;">Restaurants</a></li>
                                     </ul>
                                 </div>
                             </div>
                         </div>
                         <div class="col col-12 col-lg-3 col-five">
                             <div class="klbfooterwidget widget widget_nav_menu">
-                                <h4 class="widget-title text-capitalize" style="font-family: 'Libre Baskerville', serif;" id="hcat3"></h4>
+                                <h4 class="widget-title text-capitalize" style="font-family: 'Libre Baskerville', serif;">Fashion</h4>
                                 <div class="menu-meat-seafood-container">
-                                    <ul id="Ulsubcat3" class="menu">
+                                    <ul id="menu-meat-seafood" class="menu">
+                                        <li id="menu-item-1811" class="menu-item menu-item-type-taxonomy menu-item-object-product_cat menu-item-1811"><a href="#" style="font-family: 'Libre Baskerville', serif;">Bags</a></li>
+                                        <li id="menu-item-1814" class="menu-item menu-item-type-taxonomy menu-item-object-product_cat menu-item-1814"><a href="#" style="font-family: 'Libre Baskerville', serif;">Jewellery Shop</a></li>
+                                        <li id="menu-item-1810" class="menu-item menu-item-type-taxonomy menu-item-object-product_cat menu-item-1810"><a href="#" style="font-family: 'Libre Baskerville', serif;">Clothing</a></li>
                                     </ul>
                                 </div>
                             </div>
                         </div>
                         <div class="col col-12 col-lg-3 col-five">
                             <div class="klbfooterwidget widget widget_nav_menu">
-                                <h4 class="widget-title text-capitalize" style="font-family: 'Libre Baskerville', serif;" id="hcat4"> </h4>
+                                <h4 class="widget-title text-capitalize" style="font-family: 'Libre Baskerville', serif;">Kitchen Products &amp; Applicances</h4>
                                 <div class="menu-beverages-container">
-                                    <ul id="Ulsubcat4" class="menu">
+                                    <ul id="menu-beverages" class="menu">
+                                        <li id="menu-item-1826" class="menu-item menu-item-type-taxonomy menu-item-object-product_cat menu-item-1826"><a href="#" style="font-family: 'Libre Baskerville', serif;">Grocery</a></li>
+                                        <li id="menu-item-1824" class="menu-item menu-item-type-taxonomy menu-item-object-product_cat menu-item-1824"><a href="#" style="font-family: 'Libre Baskerville', serif;">Super Market</a></li>
+                                        <li id="menu-item-1823" class="menu-item menu-item-type-taxonomy menu-item-object-product_cat menu-item-1823"><a href="#" style="font-family: 'Libre Baskerville', serif;">Utensils</a></li>
                                     </ul>
                                 </div>
                             </div>
@@ -441,17 +401,17 @@
     <script src="~/assets/lightbox/src/js/lightbox.js"></script>
     <script src="~/assets/OwlCarousel/owl.carousel.js"></script>
     <script src="~/assets/js/jQuery.loadScroll.js"></script>
-
+   
     <script>
         $('img').loadScroll(1000);
-
+       
         $(".Sugetionbox").autofill({
 
             fullWidth: false,
             darkMode: true,
             minCharacters: 1
         });
-
+        
         function Loginpopup() {
             $('#LoginModalCenter').modal('show');
         }

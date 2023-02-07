@@ -362,6 +362,8 @@
     <Content Include="assets\OwlCarousel\owl.carousel.css" />
     <Content Include="assets\OwlCarousel\owl.carousel.js" />
     <Content Include="assets\OwlCarousel\owl.theme.default.css" />
+    <Content Include="assets\script1.js" />
+    <Content Include="assets\script2.js" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="Script\AjaxCall.js" />
