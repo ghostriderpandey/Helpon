@@ -1,4 +1,4 @@
-﻿@model HelpOn.Models.MerchantDetailModel
+﻿﻿@model HelpOn.Models.MerchantDetailModel
 @using HelpOn.Helper
 @{
     ViewBag.Title = Model.merchant.Shopname;
@@ -10,7 +10,9 @@
     }
 
         .gallery img {
-            width: 100px;
+            height: 100px !important;
+            width: 100px !important;
+            ;
             transition: 0.5s;
             padding: 2px;
             object-fit: contain;
@@ -67,7 +69,18 @@
         }
 </style>
 <style>
-
+    .couponBox {
+        width: 260px;
+        height: 141px;
+        background-color: #e24c79;
+        color: #fff;
+        font-family: 'Libre Baskerville';
+        text-transform: uppercase;
+        padding: 10px;
+        position: relative;
+        border-radius: 15px;
+        border: 2px dashed;
+    }
 
     .couponValid {
         margin: 0;
@@ -159,7 +172,7 @@
                         <div class="col-md-3 pr-lg-1">
                             <div class="card h-100" style="background: @Model.merchant.BgColor;color:#000;">
                                 <div class="card-body p-1 text-center">
-                                    <img src="@Model.merchant.ProfileImg" style="width:200px;object-fit:cover;object-position:center;border-radius:10px;" />
+                                    <img src="@Model.merchant.ProfileImg" style="width:200px; height:180px; object-fit:cover;object-position:center;border-radius:10px;" />
                                     <br />
                                     <h4>@Model.merchant.Shopname</h4>
 
@@ -193,28 +206,37 @@
                                     @{ int j = 1;}
                                     @if (Model.sliders.Count > 0)
                                     {
-
-                                        foreach (var itemSlider in Model.sliders)
+                                        if (Model.sliders.Count == 1)
                                         {
-                                            if (j == 1)
-                                            {
-                                                <div class="carousel-item active h-100">
-                                                    <img src="@Application.ImagePath/Slide/Compress/@itemSlider.Img" class="d-block w-100 h-100" alt="@itemSlider.Img" style="border-radius: .25rem;">
-                                                </div>
-                                            }
-                                            else
-                                            {
-                                                <div class="carousel-item h-100">
-                                                    <img src="@Application.ImagePath/Slide/Compress/@itemSlider.Img" class="d-block w-100 h-100" alt="@itemSlider.Img" style="border-radius: .25rem;">
-                                                </div>
-                                            }
-                                            j++;
+                                            <div class="carousel-item active h-100">
+                                                <img src="@Model.merchant.SlideIMG" class="d-block w-100 h-100" alt="@Model.merchant.SlideIMG" style="border-radius: .25rem; width:1130px !important;height:400px !important ">
+                                            </div>
                                         }
+                                        else
+                                        {
+                                            foreach (var itemSlider in Model.sliders)
+                                            {
+                                                if (j == 1)
+                                                {
+                                                    <div class="carousel-item active h-100">
+                                                        <img src="@Application.ImagePath/Slide/Compress/@itemSlider.Img" class="d-block w-100 h-100" alt="@itemSlider.Img" style="border-radius: .25rem; width: 1130px !important; height: 400px !important">
+                                                    </div>
+                                                }
+                                                else
+                                                {
+                                                    <div class="carousel-item h-100">
+                                                        <img src="@Application.ImagePath/Slide/Compress/@itemSlider.Img" class="d-block w-100 h-100" alt="@itemSlider.Img" style="border-radius: .25rem; width: 1130px !important; height: 400px !important">
+                                                    </div>
+                                                }
+                                                j++;
+                                            }
+                                        }
+
                                     }
                                     else
                                     {
                                         <div class="carousel-item active h-100">
-                                            <img src="@Model.merchant.SlideIMG" class="d-block w-100 h-100" alt="@Model.merchant.SlideIMG" style="border-radius: .25rem;">
+                                            <img src="@Model.merchant.SlideIMG" class="d-block w-100 h-100" alt="@Model.merchant.SlideIMG" style="border-radius: .25rem; width:1130px !important;height:400px !important ">
                                         </div>
                                     }
 
@@ -383,6 +405,7 @@
                                     <div class="col-12 mt-2">
                                         @if (Model.coupons.Count > 0)
                                         {
+
                                             <div class="column Coupan-owl-carousel owl-theme">
                                                 @foreach (var coupon in Model.coupons)
                                                 {
@@ -405,183 +428,200 @@
                                                             <span style="font-size: 18px;">@coupon.Name Discount</span>
 
                                                         </label>
-                                                        <p class="promocode">Promo code: <span class="code" id="Clipboard_@coupon.CouponsCode">@coupon.CouponsCode</span></p>
+                                                        <p class="promocode">
+                                                            Promo code: <span class="code" id="Clipboard_@coupon.CouponsCode">
+                                                                @if (coupon.Noofdays.ToString().Contains("-"))
+                                                                {
+                                                                    <span class="code" id="Clipboard_@coupon.CouponsCode">Expiry</span>
+                                                                }
+                                                                else if (coupon.Noofdays.ToString() == "0")
+                                                                {
+                                                                    <span class="code" id="Clipboard_@coupon.CouponsCode">Expiry</span>
+                                                                }
+                                                                else
+                                                                {<span class="code" id="Clipboard_@coupon.CouponsCode">@coupon.CouponsCode</span>
+
+                                                            }
+
+                                                            </span>
+                                                        </p>
 
                                                     </div>
                                                 }
                                             </div>
+
                                         }
                                         else
                                         {
                                             <h3 class="text-center">Coupon Comming Soon....</h3>
                                         }
                                         @* <style>
-            .card1 {
-                width: 465px;
-                height: 241px;
-                border-radius: 5px;
-                box-shadow: 0 4px 6px 0 rgb(0 0 0 / 20%);
-                background-color: #fff;
-                padding: 10px 10px;
-            }
-
-            #mydiv {
-                background-repeat: no-repeat;
-                background-size: auto;
-                background-position: center;
-                height: 250px;
-                width: 465px;
-                z-index: -1;
-            }
-
-            .main1, .copy-button {
-                display: flex;
-                justify-content: space-between;
-                padding: 0 10px;
-                align-items: center;
-            }
-
-            .content1 h2 {
-                font-size: 18px;
-                margin-left: -20px;
-                color: #565656;
-                text-transform: uppercase;
-            }
-
-            .content1 h1 {
-                font-size: 35px;
-                margin-left: -20px;
-                color: #565656;
-            }
-
-            .content1 p {
-                font-size: 16px;
-                color: #696969;
-                margin-left: -20px;
-            }
-
-            .content1 {
-                width: 220px !important;
-                float: left !important;
-            }
-
-            .coupon {
-                width: 465px;
-                height: 190px;
-                background: radial-gradient(circle at right bottom, transparent 10px, #ffffff 0) top right / 50% 40px no-repeat, radial-gradient(circle at left bottom, transparent 10px, #ffffff 0) top left / 50% 40px no-repeat, radial-gradient(circle at right top, transparent 10px, #ffffff 0) bottom right / 50% 40px no-repeat, radial-gradient(circle at left top, transparent 10px, #ffffff 0) bottom left / 50% 40px no-repeat;
-                filter: drop-shadow(3px 3px 3px #c5c5c5);
-            }
-
-            co-img {
-                width: 140px !important;
-                float: left;
-            }
-
-            .co-img img {
-                width: 100px;
-                height: 100px;
-            }
-
-            .co-img h1 {
-                font-size: 15px;
-            }
-
-            .vertical1 {
-                border-left: 5px dotted black;
-                height: 100px;
-                position: absolute;
-                left: 40%;
-            }
-
-            .copy-button {
-                margin: 12px 0 -5px 0;
-                height: 45px;
-                border-radius: 4px;
-                padding: 0 5px;
-                border: 1px solid #e1e1e1;
-            }
-
-                .copy-button input {
-                    width: 100%;
-                    height: 100%;
-                    border: none;
-                    outline: none;
-                    font-size: 15px;
-                }
-
-                .copy-button button {
-                    padding: 5px 20px;
-                    background-color: #dc143c;
-                    color: #fff;
-                    border: 1px solid transparent;
-                }
-        </style>
-        @if (Model.coupons.Count > 0)
-        {<div class="column Coupan-owl-carousel owl-theme">
-
-                    @foreach (var coupon in Model.coupons)
-                    {
-                        <div id="mydiv" data-id="@coupon.CouponsCode" style=@("background-image:url("+coupon.TemplatePath+");")>
-                            <div class="coupon">
-                                <div class="card1">
-                                    <div class="main1">
-                                        <div class="co-img">
-                                            <img src="@coupon.TemplatePath" alt="">
-                                            <h1 style="color:@(coupon.Color)"> @coupon.ProductName</h1>
-                                        </div>
-                                        <div class="vertical1"></div>
-                                        <div class="content1">
-                                            <h2 style="color:@(coupon.Color)"> @coupon.FestivalName</h2>
-                                            <h1 style="color:@(coupon.Color)">
-                                                @coupon.Discount
-                                                @if (coupon.Name.ToUpper() == "Flat".ToUpper())
-                                                {
-                                                    <span style="color:@(coupon.Color)">Rs.</span>
+                                                .card1 {
+                                                    width: 465px;
+                                                    height: 241px;
+                                                    border-radius: 5px;
+                                                    box-shadow: 0 4px 6px 0 rgb(0 0 0 / 20%);
+                                                    background-color: #fff;
+                                                    padding: 10px 10px;
                                                 }
-                                                @if (coupon.Name.ToUpper() != "Flat".ToUpper())
-                                                {
-                                                    <span style="color:@(coupon.Color)">%</span>
+
+                                                #mydiv {
+                                                    background-repeat: no-repeat;
+                                                    background-size: auto;
+                                                    background-position: center;
+                                                    height: 250px;
+                                                    width: 465px;
+                                                    z-index: -1;
                                                 }
-                                                <span>@coupon.Name</span>
-                                            </h1>
-                                            <p style="color:@(coupon.Color)">Valid till @coupon.ExpireDate</p>
-                                            <p style="color:@(coupon.Color)">  @coupon.Remark</p>
-                                        </div>
-                                    </div>
-                                    <div class="copy-button">
-                                        @if (coupon.Noofdays.ToString().Contains("-"))
-                                        {
-                                            <input id="Clipboard_@coupon.CouponsCode" type="text" readonly="" value="Expiry">
-                                        }
-                                        else if (coupon.Noofdays.ToString() == "0")
-                                        {
-                                            <input id="Clipboard_@coupon.CouponsCode" type="text" readonly="" value="Expiry">
-                                        }
-                                        else
-                                        {
-                                            <input id="Clipboard_@coupon.CouponsCode" type="text" readonly="" value="@coupon.CouponsCode">
-                                        }
-                                        @if (coupon.Noofdays.ToString().Contains("-"))
-                                        {
 
-                                        }
-                                        else if (coupon.Noofdays.ToString() == "0")
-                                        {
+                                                .main1, .copy-button {
+                                                    display: flex;
+                                                    justify-content: space-between;
+                                                    padding: 0 10px;
+                                                    align-items: center;
+                                                }
 
-                                        }
-                                        else
-                                        {
-                                            <button onclick="copyIt()" class="copybtn">COPY</button>
-                                        }
+                                                .content1 h2 {
+                                                    font-size: 18px;
+                                                    margin-left: -20px;
+                                                    color: #565656;
+                                                    text-transform: uppercase;
+                                                }
 
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    }
+                                                .content1 h1 {
+                                                    font-size: 35px;
+                                                    margin-left: -20px;
+                                                    color: #565656;
+                                                }
 
-            </div>
-        }*@
+                                                .content1 p {
+                                                    font-size: 16px;
+                                                    color: #696969;
+                                                    margin-left: -20px;
+                                                }
+
+                                                .content1 {
+                                                    width: 220px !important;
+                                                    float: left !important;
+                                                }
+
+                                                .coupon {
+                                                    width: 465px;
+                                                    height: 190px;
+                                                    background: radial-gradient(circle at right bottom, transparent 10px, #ffffff 0) top right / 50% 40px no-repeat, radial-gradient(circle at left bottom, transparent 10px, #ffffff 0) top left / 50% 40px no-repeat, radial-gradient(circle at right top, transparent 10px, #ffffff 0) bottom right / 50% 40px no-repeat, radial-gradient(circle at left top, transparent 10px, #ffffff 0) bottom left / 50% 40px no-repeat;
+                                                    filter: drop-shadow(3px 3px 3px #c5c5c5);
+                                                }
+
+                                                co-img {
+                                                    width: 140px !important;
+                                                    float: left;
+                                                }
+
+                                                .co-img img {
+                                                    width: 100px;
+                                                    height: 100px;
+                                                }
+
+                                                .co-img h1 {
+                                                    font-size: 15px;
+                                                }
+
+                                                .vertical1 {
+                                                    border-left: 5px dotted black;
+                                                    height: 100px;
+                                                    position: absolute;
+                                                    left: 40%;
+                                                }
+
+                                                .copy-button {
+                                                    margin: 12px 0 -5px 0;
+                                                    height: 45px;
+                                                    border-radius: 4px;
+                                                    padding: 0 5px;
+                                                    border: 1px solid #e1e1e1;
+                                                }
+
+                                                    .copy-button input {
+                                                        width: 100%;
+                                                        height: 100%;
+                                                        border: none;
+                                                        outline: none;
+                                                        font-size: 15px;
+                                                    }
+
+                                                    .copy-button button {
+                                                        padding: 5px 20px;
+                                                        background-color: #dc143c;
+                                                        color: #fff;
+                                                        border: 1px solid transparent;
+                                                    }
+                                            </style>
+                                            @if (Model.coupons.Count > 0)
+                                            {<div class="column Coupan-owl-carousel owl-theme">
+
+                                                        @foreach (var coupon in Model.coupons)
+                                                        {
+                                                            <div id="mydiv" data-id="@coupon.CouponsCode" style=@("background-image:url("+coupon.TemplatePath+");")>
+                                                                <div class="coupon">
+                                                                    <div class="card1">
+                                                                        <div class="main1">
+                                                                            <div class="co-img">
+                                                                                <img src="@coupon.TemplatePath" alt="">
+                                                                                <h1 style="color:@(coupon.Color)"> @coupon.ProductName</h1>
+                                                                            </div>
+                                                                            <div class="vertical1"></div>
+                                                                            <div class="content1">
+                                                                                <h2 style="color:@(coupon.Color)"> @coupon.FestivalName</h2>
+                                                                                <h1 style="color:@(coupon.Color)">
+                                                                                    @coupon.Discount
+                                                                                    @if (coupon.Name.ToUpper() == "Flat".ToUpper())
+                                                                                    {
+                                                                                        <span style="color:@(coupon.Color)">Rs.</span>
+                                                                                    }
+                                                                                    @if (coupon.Name.ToUpper() != "Flat".ToUpper())
+                                                                                    {
+                                                                                        <span style="color:@(coupon.Color)">%</span>
+                                                                                    }
+                                                                                    <span>@coupon.Name</span>
+                                                                                </h1>
+                                                                                <p style="color:@(coupon.Color)">Valid till @coupon.ExpireDate</p>
+                                                                                <p style="color:@(coupon.Color)">  @coupon.Remark</p>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="copy-button">
+                                                                            @if (coupon.Noofdays.ToString().Contains("-"))
+                                                                            {
+                                                                                <input id="Clipboard_@coupon.CouponsCode" type="text" readonly="" value="Expiry">
+                                                                            }
+                                                                            else if (coupon.Noofdays.ToString() == "0")
+                                                                            {
+                                                                                <input id="Clipboard_@coupon.CouponsCode" type="text" readonly="" value="Expiry">
+                                                                            }
+                                                                            else
+                                                                            {
+                                                                                <input id="Clipboard_@coupon.CouponsCode" type="text" readonly="" value="@coupon.CouponsCode">
+                                                                            }
+                                                                            @if (coupon.Noofdays.ToString().Contains("-"))
+                                                                            {
+
+                                                                            }
+                                                                            else if (coupon.Noofdays.ToString() == "0")
+                                                                            {
+
+                                                                            }
+                                                                            else
+                                                                            {
+                                                                                <button onclick="copyIt()" class="copybtn">COPY</button>
+                                                                            }
+
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        }
+
+                                                </div>
+                                            }*@
                                     </div>
                                 </div>
                             </div>
