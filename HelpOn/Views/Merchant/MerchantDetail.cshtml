@@ -172,7 +172,7 @@
                         <div class="col-md-3 pr-lg-1">
                             <div class="card h-100" style="background: @Model.merchant.BgColor;color:#000;">
                                 <div class="card-body p-1 text-center">
-                                    <img src="@Model.merchant.ProfileImg" style="width:200px; height:180px; object-fit:cover;object-position:center;border-radius:10px;" />
+                                    <img src="@Model.merchant.ProfileImg" style="width: 180px; height: 180px; object-fit: cover; object-position: center; border-radius: 10px;" />
                                     <br />
                                     <h4>@Model.merchant.Shopname</h4>
 
@@ -974,16 +974,15 @@
     function copyToClipboard(element) {
         var $temp = $("<input>");
         $("body").append($temp);
-        $temp.val($(element).text()).select();
+        $temp.val(element).select();
         document.execCommand("copy");
         $temp.remove();
     }
     $(".CopiedCouponCode").each(function () {
         $(this).click(function () {
             var id = $(this).attr('data-id');
-
             var e = "#Clipboard_" + id;
-            copyToClipboard(e);
+            copyToClipboard(id);
             swal('Alert !','Copied Coupon Code : '+id+'','success');
         });
     });
