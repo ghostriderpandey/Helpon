@@ -161,5 +161,12 @@ namespace HelpOn.Controllers
             }
             return Json(resultSet);
         }
+
+        [Route("mobilesearch")]
+        public ActionResult MobileSearch()
+        {
+
+            return View();
+        }
     }
 }

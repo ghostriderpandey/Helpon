@@ -338,7 +338,9 @@
                                                     }
                                                     else
                                                     {
-                                                        <li>@Model.merchant.Amenities</li>
+
+                                                        @Html.Raw(Model.merchant.Amenities);
+
                                                     }
 
 
@@ -1073,6 +1075,10 @@
     }
     function GoBack() {
         GetpartialView('/Merchant/_MerchantProduct',0);
+    }
+    function GoBackmore() {
+        GetpartialView('/Merchant/_MerchantMoreProduct', 0);
+        $("#divmoreproduct").hide();
     }
     var Categoryid = 0;
     $(".nav-link").each(function () {

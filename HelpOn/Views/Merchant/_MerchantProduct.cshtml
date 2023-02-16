@@ -81,3 +81,15 @@
     }
 
 </div>
+@if (Convert.ToInt16(ViewBag.Itemcount == null ? 15 : ViewBag.Itemcount) == Convert.ToInt16(ViewBag.Itemshow))
+{
+    <div class="row float-right mr-2" id="divmoreproduct">
+        <div class="klb-title module-header">
+            <div class="button-icon">
+                <button type="button" class="btn btn-success" onclick="GoBackmore()">
+                    <i class="fa fa-product-hunt"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+}

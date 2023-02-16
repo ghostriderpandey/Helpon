@@ -141,39 +141,43 @@
             </div>
         </div>
         <nav class="header-mobile-nav">
-            <div class="mobile-nav-wrapper">
-                <ul>
-                    <li class="menu-item">
-                        <a href="/" class="store">
-                            <i class="klbth-icon-store"></i>
-                            <span style="font-family: 'Libre Baskerville', serif;">Home</span>
-                        </a>
-                    </li>
-                    <li class="menu-item">
-                        <a href="#" class="search">
-                            <i class="klbth-icon-search"></i>
-                            <span style="font-family: 'Libre Baskerville', serif;">Search</span>
-                        </a>
-                    </li>
-                    <li class="menu-item">
-                        <a href="/Coming-Soon" class="wishlist">
-                            <i class="klbth-icon-heart-1"></i>
-                            <span style="font-family: 'Libre Baskerville', serif;">Features</span>
-                        </a>
-                    </li>
-                    <li class="menu-item">
-                        <a href="/Coming-Soon" class="user">
-                            <i class="klbth-icon-user"></i>
-                            <span style="font-family: 'Libre Baskerville', serif;">Login</span>
-                        </a>
-                    </li>
-                    <li class="menu-item">
-                        <a href="#" class="categories">
-                            <i class="klbth-icon-menu-thin"></i>
-                            <span style="font-family: 'Libre Baskerville', serif;">More</span>
-                        </a>
-                    </li>
-                </ul>
+            <div class="col-sm-12">
+                <div class="row">
+                    <div class="mobile-nav-wrapper">
+                        <ul>
+                            <li class="menu-item">
+                                <a href="/" class="store">
+                                    <i class="klbth-icon-store"></i>
+                                    <span style="font-family: 'Libre Baskerville', serif;">Home</span>
+                                </a>
+                            </li>
+                            <li class="menu-item">
+                                <a onClick="javascript:location.href = '/mobilesearch';" class="search">
+                                    <i class="klbth-icon-search"></i>
+                                    <span style="font-family: 'Libre Baskerville', serif;">Search</span>
+                                </a>
+                            </li>
+                            <li class="menu-item">
+                                <a href="/Coming-Soon" class="wishlist">
+                                    <i class="klbth-icon-heart-1"></i>
+                                    <span style="font-family: 'Libre Baskerville', serif;">Features</span>
+                                </a>
+                            </li>
+                            <li class="menu-item">
+                                <a onClick="javascript:location.href = 'http://merchant.helpon.in/Merchant/login.aspx';" class="user">
+                                    <i class="klbth-icon-user"></i>
+                                    <span style="font-family: 'Libre Baskerville', serif;">Login</span>
+                                </a>
+                            </li>
+                            <li class="menu-item">
+                                <a href="#" class="categories">
+                                    <i class="klbth-icon-menu-thin"></i>
+                                    <span style="font-family: 'Libre Baskerville', serif;">More</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
             </div>
         </nav>
     </header>
@@ -401,17 +405,17 @@
     <script src="~/assets/lightbox/src/js/lightbox.js"></script>
     <script src="~/assets/OwlCarousel/owl.carousel.js"></script>
     <script src="~/assets/js/jQuery.loadScroll.js"></script>
-   
+
     <script>
         $('img').loadScroll(1000);
-       
+
         $(".Sugetionbox").autofill({
 
             fullWidth: false,
             darkMode: true,
             minCharacters: 1
         });
-        
+
         function Loginpopup() {
             $('#LoginModalCenter').modal('show');
         }

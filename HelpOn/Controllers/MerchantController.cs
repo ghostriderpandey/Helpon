@@ -99,7 +99,7 @@ namespace HelpOn.Controllers
             ProductDetailModel productDetail = new ProductDetailModel();
             productDetail.product = repo.GetMerchantProduct().FindAll(e => e.ID == id).FirstOrDefault();
             ViewBag.MID = productDetail.product.MID;
-
+            ViewBag.Itemshow = 0;
             return View(productDetail);
         }
         public ActionResult _ReletiveProduct(int id)
@@ -118,9 +118,24 @@ namespace HelpOn.Controllers
         {
 
             List<ProductModel> products = new List<ProductModel>();
-            products = repo.GetMerchantProduct().FindAll(e => (e.MID == id && (e.CID == cid || (cid) == 0) && (e.Name == name || (name) == "")));
+            products = repo.GetMerchantProduct().FindAll(e => (e.MID == id && (e.CID == cid || (cid) == 0) && (e.Name == name || (name) == ""))).Take(15).ToList();
             List<CartModel> cart = repo.GetCart(id, SessionHelper.CustomerID);
+            ViewBag.Itemshow = products.Count();
+            ViewBag.CartItem = cart.Count;
+            if (products.Count <= 0)
+            {
+                products = new List<ProductModel>();
+            }
 
+            return PartialView("_MerchantProduct", products);
+        }
+        public ActionResult _MerchantMoreProduct(int id, int cid = 0, string name = "")
+        {
+
+            List<ProductModel> products = new List<ProductModel>();
+            products = repo.GetMerchantProduct().FindAll(e => (e.MID == id && (e.CID == cid || (cid) == 0) && (e.Name == name || (name) == ""))).ToList();
+            List<CartModel> cart = repo.GetCart(id, SessionHelper.CustomerID);
+            ViewBag.Itemcount = products.Count();
             ViewBag.CartItem = cart.Count;
             if (products.Count <= 0)
             {

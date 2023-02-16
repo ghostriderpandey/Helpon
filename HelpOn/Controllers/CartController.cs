@@ -20,8 +20,8 @@ namespace HelpOn.Controllers
         {
             return View();
         }
-        
-        public ActionResult _Cart(int id,int cid)
+
+        public ActionResult _Cart(int id, int cid)
         {
             ViewBag.MID = id;
             List<CartModel> cartitem = repo.GetCart(id, SessionHelper.CustomerID);
@@ -31,9 +31,9 @@ namespace HelpOn.Controllers
                 bankDetail = new MerchantBankDetail();
             }
             CartTotal total = new CartTotal();
-            total = Connection.Query<CartTotal>("Proc_ApplyCoupon 'GetTotal','" + SessionHelper.CustomerID + "','" + id+ "'").FirstOrDefault();
+            total = Connection.Query<CartTotal>("Proc_ApplyCoupon 'GetTotal','" + SessionHelper.CustomerID + "','" + id + "'").FirstOrDefault();
             dynamic mymodel = new ExpandoObject();
-            
+
             ViewBag.TotalAmount = total.Total;
             mymodel.cartitem = cartitem;
             mymodel.bankDetail = bankDetail;
@@ -42,21 +42,21 @@ namespace HelpOn.Controllers
         public JsonResult ApplyCoupon(ApplyCouponCode applyCoupon)
         {
             CartTotal total = new CartTotal();
-            total = Connection.Query<CartTotal>("Proc_ApplyCoupon 'ApplyNow','" + SessionHelper.CustomerID + "','" + applyCoupon.MID + "','" + applyCoupon.Code + "'").FirstOrDefault();
-           return Json(total);
+            total = Connection.Query<CartTotal>("Proc_ApplyCoupon 'ApplyNow','" + SessionHelper.CustomerID + "','" + applyCoupon.MID + "','" + applyCoupon.Code.Trim() + "'").FirstOrDefault();
+            return Json(total);
         }
-        
+
         public ActionResult _ShippingAddress()
         {
-            
+
             return PartialView("_ShippingAddress", null);
         }
         [Route("Cart/AddToCart")]
-        public JsonResult AddToCart(int PID,int Qty)
+        public JsonResult AddToCart(int PID, int Qty)
         {
             AppTransactionMessage appTransaction = new AppTransactionMessage();
             appTransaction = Connection.Query<AppTransactionMessage>("Exec ProcManage_Cart 'insert','" + SessionHelper.CustomerID + "','" + PID + "','" + Qty + "'").FirstOrDefault();
-           
+
             return Json(appTransaction);
         }
         [Route("Cart/DeleteCart")]
@@ -64,7 +64,7 @@ namespace HelpOn.Controllers
         {
             AppTransactionMessage appTransaction = new AppTransactionMessage();
             appTransaction = Connection.Query<AppTransactionMessage>("Exec ProcManage_Cart 'Delete','" + SessionHelper.CustomerID + "','" + PID + "'").FirstOrDefault();
-           
+
             return Json(appTransaction);
         }
         [HttpPost]
@@ -99,7 +99,7 @@ namespace HelpOn.Controllers
                 appTransaction = Connection.ReturnList<AppTransactionMessage>("ProcManage_Order", para).FirstOrDefault();
                 return Json(appTransaction);
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 appTransaction.Status = 0;
                 appTransaction.Message = ex.Message;
@@ -111,7 +111,7 @@ namespace HelpOn.Controllers
         {
             return PartialView("_UploadFile");
         }
-        
+
 
     }
 }
